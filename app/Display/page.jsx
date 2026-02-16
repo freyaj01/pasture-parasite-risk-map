@@ -96,8 +96,31 @@ export default function Display() {
 
     </div>
         </details>
-
-   //
+        <details className="p-4">
+          <summary className="cursor-pointer font-medium">
+            Feedback? What could we improve on
+          </summary>
+            <div className="p-6 bg-gray-100 rounded mt-4">
+                <p className="mb-5 text-gray-txt">Have questions, suggestions, or just want to say hello? We'd love to hear from you! Drop us a message and we'll get back to you as soon as possible.</p>
+                <p></p>
+                <div className="relative mb-4">
+                    <label htmlFor="name" className="leading-7 text-sm text-gray-dark onclick-blue ">Name</label>
+                    <input type="text" id="name" name="name"  className="w-full bg-white rounded border border-gray-txt text-base outline-none text-gray-txt py-1 px-3 leading-8
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition" required/>
+                </div>
+                <div className="relative mb-4"> 
+                    <label htmlFor="email" className="leading-7 text-sm text-gray-dark">Email</label>
+                    <input type="email" id="email" name="email"  className="w-full bg-white rounded border border-gray-txt text-base outline-none text-gray-txt py-1 px-3 leading-8
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition" required/>
+                </div>
+                <div className="relative mb-4">
+                    <label htmlFor="message" className="leading-7 text-sm text-gray-dark">Message</label>
+                    <textarea id="message" name="message"  className="w-full bg-white rounded border border-gray-txt text-base outline-none text-gray-txt py-1 px-3 leading-8
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition" required/>
+                </div>
+                <button className="text-white bg-[#2171b8]  cursor-pointer  transition duration 300 hover:bg-blue-500  border-0 py-3 px-4 focus:outline-none rounded text-lg">Submit</button>
+            </div>
+        </details>
       </div>
 
       {showModal && (
