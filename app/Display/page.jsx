@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import MapPage from "../Map/page";
 
 
 export default function Display() {
@@ -28,7 +29,7 @@ export default function Display() {
         <main className="flex-1 relative">
           <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
    <div className="w-full h-full">
-     
+      <MapPage />
     </div>
           </div>
 
