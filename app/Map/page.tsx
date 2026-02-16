@@ -19,3 +19,4 @@ export default function MapPage() {
 
   return <div id="map" className="w-full h-full scroll z-100" />;
 }
+
