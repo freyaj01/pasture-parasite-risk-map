@@ -7,6 +7,7 @@ import MapPage from "../Map/page";
 
 export default function Display() {
       const [showModal, setShowModal] = useState(true);
+      const [showModal2, setShowModal2] = useState(false);
     return (
     <main>
 <Header />
@@ -16,12 +17,12 @@ export default function Display() {
       <div className="flex flex-1 relative">
         {/* Left Info Panel */}
         <aside className="w-[320px] bg-white border-r p-6" >
-          <h2 className="text-xl font-semibold mb-4">How to use this map</h2>
+          <h2 className="text-xl font-semibold mb-4">Area Name</h2>
           <ul className="space-y-4 text-sm text-gray-700">
             
-            <li>• Zoomed out – shows approximate regional parasite risk</li>
-            <li>• Zoomed in – shows individual reference grazing areas</li>
-            <li>• Click a location to see what environmental factors are driving the risk.</li>
+            <li>• parasite risk</li>
+            <li>• weather</li>
+            <li>• other.</li>
           </ul>
         </aside>
 
@@ -145,9 +146,9 @@ export default function Display() {
                 More info
               </button>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => { setShowModal(false); setShowModal2(true); }}
                 className="px-4 py-2 rounded bg-[#2171b8] text-white hover:bg-[#02253e] font-semibold cursor-pointer transition duration-300"
-              >
+               >
                 Continue
               </button>
             </div>
@@ -155,6 +156,36 @@ export default function Display() {
         </div>
       )}
     </div>
+
+    {showModal2 && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500">
+    <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 gap-2">
+    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+
+<i 
+className="fa-notdog fa-solid fa-sun" 
+style={{color: "rgba(255, 208, 40, 1.00)"}}
+/>
+How to use this Map
+</h3>
+        <ul className="space-y-4 text-sm text-gray-700">
+            <li>• Zoomed out – shows approximate regional parasite risk</li>
+            <li>• Zoomed in – shows individual reference grazing areas</li>
+            <li>• Click a location to see what environmental factors are driving the risk.</li>
+          </ul>    
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={() => setShowModal2(false)}
+          className="px-4 py-2 rounded bg-[#2171b8] text-white hover:bg-[#02253e] font-semibold cursor-pointer transition duration-300"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+    
     <Footer />
     </main>
     
