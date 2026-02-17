@@ -35,7 +35,7 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- git clone https://github.com/freyaj01/pasture-parasite-risk-map
 
--- cd parasite-risk-map
+-- cd pasture-parasite-risk-map
 
 -- npm install
 
