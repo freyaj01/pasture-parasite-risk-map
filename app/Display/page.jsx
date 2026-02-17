@@ -126,7 +126,7 @@ export default function Display() {
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500">
           <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
-           <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+           <h3 className="text-lg font-semibold mb-2 flex items-center gap-2 dark:text-black">
 
             <i 
             className="fa-notdog fa-solid fa-sun" 
@@ -140,7 +140,7 @@ export default function Display() {
             </p>
 
             <div className="flex justify-end gap-2">
-              <button className="px-4 py-2 rounded bg-gray-100 font-semibold hover:bg-gray-200 transiton duration-300" onClick={() => setShowModal(false)}    >
+              <button className="px-4 py-2 rounded bg-gray-100 font-semibold hover:bg-gray-200 transiton duration-300 dark:text-black" onClick={() => setShowModal(false)}    >
                 More info
               </button>
               <button
