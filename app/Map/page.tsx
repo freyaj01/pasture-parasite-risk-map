@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 
-// Define the structure for a single weather period (e.g., weather at 3pm, 6pm, etc.)
+// define the structure for a single weather period (for example- weather at 3pm, 6pm, ....)
 interface WeatherPeriod {
   timestamp: string;
   temp: number;
@@ -13,7 +13,7 @@ interface WeatherPeriod {
   windSpeed: number;
 }
 
-// Define the structure for the complete weather data returned from the API
+// this defines structure for complete weather data returned from the API
 interface WeatherData {
   city: string;
   country: string;
@@ -22,7 +22,7 @@ interface WeatherData {
   periods: WeatherPeriod[];
 }
 
-// Define the props that this component accepts from the parent Display component
+// defines the props that this component accepts from the parent Display component
 interface MapComponentProps {
   onWeatherDataChange?: (data: WeatherData | null) => void;
   onLoadingChange?: (loading: boolean) => void;
@@ -30,17 +30,17 @@ interface MapComponentProps {
 
 function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProps) {
 
-  // useEffect runs once when the component loads to initialize the map
+  // useEffect runs once when component loads to initialise map
   useEffect(() => {
-    // Dynamically import Leaflet library only on the client side (not during server-side rendering)
+    // import Leaflet library only on client side (not during server-side rendering)
     import("leaflet").then((L) => {
-      // Check if the map container is already initialized and remove it if so
+      // checkss if map container is already initialised and remove it if so
       const container = L.DomUtil.get("map");
       if (container) {
         (container as any)._leaflet_id = null;
       }
 
-      // Initialize the map and set the default view to the UK
+      // initialise map and set default view to be UK
       const map = L.map("map", { scrollWheelZoom: false }).setView(
         [55.3781, -3.436],
         6
@@ -67,12 +67,12 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
       // Variable to keep track of the currently placed marker on the map
       let currentMarker: L.Marker | null = null;
 
-      // Function that runs when the user clicks anywhere on the map
+      // this function is the one that runs when the user clicks anywhere on the map
       const handleMapClick = async (e: L.LeafletMouseEvent) => {
-        // Extract the latitude and longitude from the click event
+        // extract the latitude and longitude from the click event
         const { lat, lng } = e.latlng;
 
-        // Remove the previous marker if one exists (so we only have one marker at a time)
+        // Remove the previous marker if one exists (so u only see one marker at a time)
         if (currentMarker) {
           map.removeLayer(currentMarker);
         }
@@ -101,22 +101,22 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
           forecast.lat = lat.toFixed(4);
           forecast.lng = lng.toFixed(4);
           
-          // Send the weather data up to the parent Display component to show in the sidebar
+          // Send weather data up to the parent Display component to show in the sidebar
           if (onWeatherDataChange) onWeatherDataChange(forecast);
         } catch (err) {
           // If there's an error log it and clear the weather data in the parent
           console.error("Error fetching weather:", err);
           if (onWeatherDataChange) onWeatherDataChange(null);
         } finally {
-          // Tell the parent Display component that loading has finished
+          //tells the parent Display component that loading has finished
           if (onLoadingChange) onLoadingChange(false);
         }
       };
 
-      // Attach the click handler to the map
+      // Attach click handler to map
       map.on("click", handleMapClick);
 
-      // Cleanup function that runs when the component unmounts
+      // Cleanup function- runs when component unmounts
       return () => {
         map.remove();
       };
@@ -130,7 +130,7 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
   );
 }
 
-// Export the component with server-side rendering disabled (required for Leaflet)
+// Export component with server-side rendering disabled (need this for Leaflet)
 export default dynamic(() => Promise.resolve(MapComponent), {
   ssr: false,
 });

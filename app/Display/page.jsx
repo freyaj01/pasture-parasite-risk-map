@@ -18,7 +18,7 @@ export default function Display() {
   // State to control whether the 24-hour forecast is expanded or collapsed
   const [showForecast, setShowForecast] = useState(false);
 
-  // Helper function to format the timestamp into a readable date and time
+  // Helper function to format timestamp into a readable date and time
   const formatTime = (dateString) => {
 
     const date = new Date(dateString);
@@ -38,10 +38,10 @@ export default function Display() {
        
         <div className="flex flex-1 relative">
 
-          {/* Left Info Panel - shows weather data when a location is clicked */}
+          {/* Left Panel - shows weather data when a location is clicked on*/}
           <aside className="w-[320px] bg-white border-r p-6 overflow-y-auto">
 
-            {/* Show a placeholder message before any location is clicked */}
+            {/* Show placeholder message before any location clicked */}
             {!weatherData && !weatherLoading && (
               <div className="text-sm text-gray-500">
                 <h2 className="text-xl font-semibold mb-4 text-gray-800">Location Info</h2>
@@ -49,7 +49,7 @@ export default function Display() {
               </div>
             )}
 
-            {/* Show a loading message while weather data is being fetched */}
+            {/* Show loading message while weather data is being fetched */}
             {weatherLoading && (
               <div className="text-sm text-gray-500">
                 <h2 className="text-xl font-semibold mb-4 text-gray-800">Loading...</h2>
@@ -57,7 +57,7 @@ export default function Display() {
               </div>
             )}
 
-            {/* Show weather data once it has been retrieved from the API */}
+            {/* Show weather data wen its been retrieved from the API */}
             {weatherData && weatherData.periods.length > 0 && (
               <div>
                 {/* Display the city and country name */}
@@ -114,7 +114,7 @@ export default function Display() {
                   </div>
                 </div>
 
-                {/* Button to toggle the 24-hour forecast */}
+                {/* Button- toggle 24-hour forecast */}
                 <button
                   onClick={() => setShowForecast(!showForecast)}
                   className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
@@ -122,7 +122,7 @@ export default function Display() {
                   {showForecast ? "Hide 24-Hour Forecast" : "Show 24-Hour Forecast"}
                 </button>
 
-                {/* 24-hour forecast - only visible when showForecast is true */}
+                {/* 24-hour forecast - only shown when showForecast is true */}
                 {showForecast && (
                   <div className="mt-4 space-y-2 max-h-[40vh] overflow-y-auto">
                     <h4 className="font-semibold text-sm text-gray-700 border-b pb-1 sticky top-0 bg-white">
