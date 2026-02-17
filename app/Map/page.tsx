@@ -39,6 +39,12 @@ function MapComponent() {
   useEffect(() => {
     // Dynamically import Leaflet library only on the client side (not during server-side rendering)
     import("leaflet").then((L) => {
+      // Check if the map container is already initialized and remove it if so
+      const container = L.DomUtil.get("map");
+      if (container) {
+        (container as any)._leaflet_id = null;
+      }
+
       // Initialize the map and set the default view to the UK
       const map = L.map("map", { scrollWheelZoom: false }).setView(
         [55.3781, -3.436],
@@ -87,7 +93,7 @@ function MapComponent() {
         try {
           // Make a request to our Python Flask backend API with the clicked coordinates
           const response = await fetch(
-            `http://127.0.0.1:5000/api/weather?lat=${lat}&lon=${lng}`
+            `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`
           );
           
           // Check if the response was successful
