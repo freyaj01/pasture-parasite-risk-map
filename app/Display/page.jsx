@@ -61,7 +61,7 @@ export default function Display() {
             {weatherData && weatherData.periods.length > 0 && (
               <div>
                 {/* Display the city and country name */}
-                <h2 className="text-xl font-semibold mb-1">
+                <h2 className="font-bold text-gray-900">
                   {weatherData.city}, {weatherData.country}
                 </h2>
 
@@ -76,6 +76,51 @@ export default function Display() {
                     Clear selection
                   </button>
                   </div>
+
+                {/* Parasite Risk Section */}
+                {weatherData.parasiteRisk && (
+                  <div className="mb-4 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border border-orange-200">
+                    <h4 className="font-semibold text-sm text-gray-700 mb-3">
+                      Parasite Risk Assessment
+                    </h4>
+                    
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm text-gray-600">Total Risk Score</span>
+                      <span className={`text-2xl font-bold ${
+                        weatherData.parasiteRisk.riskLevel === 'Very High' ? 'text-red-600' :
+                        weatherData.parasiteRisk.riskLevel === 'High' ? 'text-orange-500' :
+                        weatherData.parasiteRisk.riskLevel === 'Moderate' ? 'text-yellow-500' :
+                        'text-green-500'
+                      }`}>
+                        {weatherData.parasiteRisk.totalRisk}/100
+                      </span>
+                    </div>
+                    
+                    <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 ${
+                      weatherData.parasiteRisk.riskLevel === 'Very High' ? 'bg-red-100 text-red-700' :
+                      weatherData.parasiteRisk.riskLevel === 'High' ? 'bg-orange-100 text-orange-700' :
+                      weatherData.parasiteRisk.riskLevel === 'Moderate' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-green-100 text-green-700'
+                    }`}>
+                      {weatherData.parasiteRisk.riskLevel} Risk
+                    </div>
+                    
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Base Risk (Region):</span>
+                        <span className="font-bold text-gray-900">{weatherData.parasiteRisk.baseRisk}/60</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Weather Risk (Current):</span>
+                        <span className="font-bold text-gray-900">{weatherData.parasiteRisk.weatherRisk}/40</span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t">
+                        <span className="text-gray-600">Recent Rainfall (14d):</span>
+                        <span className="font-bold text-gray-900">{weatherData.parasiteRisk.weather.recentRainfall}mm</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Current weather section */}
                 <div className="mb-4">

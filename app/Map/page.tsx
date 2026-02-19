@@ -13,6 +13,19 @@ interface WeatherPeriod {
   windSpeed: number;
 }
 
+interface ParasiteRiskData {
+  region: string;
+  baseRisk: number;
+  weatherRisk: number;
+  totalRisk: number;
+  riskLevel: string;
+  weather: {
+    temp: number;
+    humidity: number;
+    recentRainfall: number;
+  };
+}
+
 // this defines structure for complete weather data returned from the API
 interface WeatherData {
   city: string;
@@ -20,6 +33,7 @@ interface WeatherData {
   lat?: string;
   lng?: string;
   periods: WeatherPeriod[];
+  parasiteRisk?: ParasiteRiskData;
 }
 
 // defines the props that this component accepts from the parent Display component
@@ -85,21 +99,32 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
         
         try {
           // Make a request to our Python Flask backend API with the clicked coordinates
-          const response = await fetch(
+          const weatherResponse = await fetch(
             `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`
           );
           
           // Check if the response was successful
-          if (!response.ok) {
+          if (!weatherResponse.ok) {
             throw new Error("Failed to fetch weather data");
           }
           
           // Parse the JSON response from the Python backend
-          const forecast: WeatherData = await response.json();
+          const forecast: WeatherData = await weatherResponse.json();
           
           // Add the coordinates to the forecast data for display
           forecast.lat = lat.toFixed(4);
           forecast.lng = lng.toFixed(4);
+          
+          const region = "NorthWest";
+          
+          const riskResponse = await fetch(
+            `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
+          );
+          
+          if (riskResponse.ok) {
+            const riskData = await riskResponse.json();
+            forecast.parasiteRisk = riskData;
+          }
           
           // Send weather data up to the parent Display component to show in the sidebar
           if (onWeatherDataChange) onWeatherDataChange(forecast);
