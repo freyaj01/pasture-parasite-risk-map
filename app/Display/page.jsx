@@ -4,9 +4,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MapPage from "../Map/page";
 
-
 export default function Display() {
-      const [showModal, setShowModal] = useState(true);
+const [showModal, setShowModal] = useState(true);
+const [hasRiskData, setHasRiskData] = useState(true);
+const [hasWeatherData, setHasWeatherData] = useState(true);
+
+ 
     return (
     <main>
 <Header />
@@ -28,9 +31,21 @@ export default function Display() {
         {/* Map Area */}
         <main className="flex-1 relative">
           <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
-   <div className="w-full h-full">
-      <MapPage />
-    </div>
+        <div className="w-full h-full">
+{!hasRiskData ? (
+  <div className="w-full h-full flex items-center justify-center text-gray-500 text-lg">
+    No risk data available
+  </div>
+) : !hasWeatherData ? (
+  <div className="w-full h-full flex items-center justify-center text-gray-500 text-lg">
+    Not able to show current weather
+  </div>
+) : (
+  <MapPage />
+)}
+
+</div>
+
           </div>
 
           <div className="absolute top-6 right-6 bg-white shadow rounded p-4 z-500">
