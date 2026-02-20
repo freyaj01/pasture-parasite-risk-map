@@ -54,5 +54,14 @@
     "livestockScore": 30,
     "prevalenceScore": 40,
     "baseRiskScore": 25
+  },
+
+  "NorthEast": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "livestockDensity": 100,
+    "livestockScore": 50,
+    "prevalenceScore": 50,
+    "baseRiskScore": 30
   }
 }

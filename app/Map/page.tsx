@@ -81,6 +81,52 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
       // Variable to keep track of the currently placed marker on the map
       let currentMarker: L.Marker | null = null;
 
+      // Function to determine which region based on coordinates
+const getRegionFromCoordinates = (lat: number, lng: number): string => {
+  // North East (Newcastle, Durham, Sunderland, Middlesbrough)
+  if (lat > 53.5 && lng > -2) {
+    return "NorthEast";
+  }
+  
+  // North West (Cumbria, Lancashire, Manchester, Liverpool)
+  if (lat > 53 && lng < -2) {
+    return "NorthWest";
+  }
+  
+  // Yorkshire (Leeds, Sheffield, York)
+  if (lat >= 53 && lat <= 54.5 && lng >= -2 && lng <= 0) {
+    return "Yorkshire";
+  }
+  
+  // South West (Devon, Cornwall, Somerset, Bristol)
+  if (lat < 52 && lng < -2) {
+    return "SouthWest";
+  }
+  
+  // East Anglia (Norfolk, Suffolk, Cambridge)
+  if (lat >= 52 && lat < 53.5 && lng > 0.5) {
+    return "EastAnglia";
+  }
+  
+  // South East (London, Kent, Sussex, Surrey, Hampshire)
+  if (lat < 52 && lng >= -1) {
+    return "SouthEast";
+  }
+  
+  // West Midlands (Birmingham, Shropshire, Staffordshire, Worcestershire)
+  if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3) {
+    return "WestMidlands";
+  }
+  
+  // East Midlands (Nottingham, Leicester, Derby, Lincoln)
+  if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5) {
+    return "EastMidlands";
+  }
+  
+  // Default fallback for any gaps
+  return "EastMidlands";
+};
+
       // this function is the one that runs when the user clicks anywhere on the map
       const handleMapClick = async (e: L.LeafletMouseEvent) => {
         // extract the latitude and longitude from the click event
@@ -115,7 +161,8 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
           forecast.lat = lat.toFixed(4);
           forecast.lng = lng.toFixed(4);
           
-          const region = "NorthWest";
+          // Determine which region based on the clicked coordinates
+          const region = getRegionFromCoordinates(lat, lng);
           
           const riskResponse = await fetch(
             `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
