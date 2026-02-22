@@ -146,9 +146,9 @@ const getRegionFromCoordinates = (lat: number, lng: number): string => {
         try {
           // Make a request to our Python Flask backend API with the clicked coordinates
           const weatherResponse = await fetch(
-            `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`
+            `https://parasite-risk-api.onrender.com/api/weather?lat=${lat}&lon=${lng}`
           );
-          
+
           // Check if the response was successful
           if (!weatherResponse.ok) {
             throw new Error("Failed to fetch weather data");
@@ -165,8 +165,8 @@ const getRegionFromCoordinates = (lat: number, lng: number): string => {
           const region = getRegionFromCoordinates(lat, lng);
           
           const riskResponse = await fetch(
-            `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
-          );
+            `https://parasite-risk-api.onrender.com/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
+              );
           
           if (riskResponse.ok) {
             const riskData = await riskResponse.json();
