@@ -39,7 +39,7 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- npm install
 
--- npm run dev
+-- npm run dev:all
 
 -- localhost: 3000
 
