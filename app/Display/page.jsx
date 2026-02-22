@@ -520,6 +520,34 @@ export default function Display() {
                 </p>
               </div>
             </div>
+        </details>
+      </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+           <h3 className="text-lg font-semibold mb-2 flex items-center gap-2 dark:text-black">
+
+            <i 
+            className="fa-notdog fa-solid fa-sun" 
+            style={{color: "rgba(255, 208, 40, 1.00)"}}
+            />
+  About this map
+</h3>
+
+            <p className="text-sm text-gray-600 mb-4">
+             This map shows an estimated parasite risk level based on environmental conditions. It is meant to be used as a guide to help you understand potential parasite risk in your area, but should not be used as the sole source of information for making decisions about parasite management.<br></br><br></br>Always consult with your veterinarian for specific advice about parasite control on your farm.
+            </p>
+
+            <div className="flex justify-end gap-2">
+              <button className="px-4 py-2 rounded bg-gray-100 font-semibold hover:bg-gray-200 transiton duration-300 dark:text-black" onClick={() => setShowModal(false)}    >
+                More info
+              </button>
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 rounded bg-[#2171b8] text-white hover:bg-[#02253e] font-semibold cursor-pointer transition duration-300"
+              >
+                Continue
           </details>
           <details className="p-4">
             <summary className="cursor-pointer font-medium">
