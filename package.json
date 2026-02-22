@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "backend": "python3 -m gunicorn -w 4 -b 0.0.0.0:8000 weatherAPI.weather_api:app",
+    "backend": "python3 weatherAPI/weather_api.py",
     "dev:all": "concurrently \"npm run backend\" \"npm run dev\"",
     "lint": "eslint"
   },

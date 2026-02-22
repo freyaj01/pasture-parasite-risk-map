@@ -103,6 +103,7 @@ def parasite_risk():
         recent_rainfall, 
         current_weather["temp"], 
         current_weather["humidity"]
+
     )
     
     # Calculate total risk
@@ -122,6 +123,10 @@ def parasite_risk():
         "region": region,
         "baseRisk": base_risk,
         "weatherRisk": round(weather_risk, 1),
+        "recentRainfall": round(recent_rainfall, 1),
+        "currentTemp": current_weather["temp"],
+        "currentHumidity": current_weather["humidity"],
+        "regionData": REGION_DATA[region],
         "totalRisk": round(parasite_risk, 1),
         "riskLevel": risk_level,
         "weather": {
