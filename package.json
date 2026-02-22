@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "backend": "python3 weatherAPI/weather_api.py",
+    "dev:all": "concurrently \"npm run backend\" \"npm run dev\"",
     "lint": "eslint"
   },
   "dependencies": {
     "@tailwindplus/elements": "^1.0.22",
+    "concurrently": "^9.0.0",
     "leaflet": "^1.9.4",
     "next": "16.1.6",
     "react": "19.2.3",

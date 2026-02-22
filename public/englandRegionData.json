@@ -1,0 +1,58 @@
+{
+  "NorthWest": {
+    "rainfallMm": 1100,
+    "rainfallScore": 75,
+    "livestockDensity": 180,
+    "livestockScore": 75,
+    "prevalenceScore": 75,
+    "baseRiskScore": 45
+  },
+  "SouthWest": {
+    "rainfallMm": 1000,
+    "rainfallScore": 75,
+    "livestockDensity": 160,
+    "livestockScore": 75,
+    "prevalenceScore": 75,
+    "baseRiskScore": 45
+  },
+  "WestMidlands": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "livestockDensity": 140,
+    "livestockScore": 50,
+    "prevalenceScore": 50,
+    "baseRiskScore": 30
+  },
+  "Yorkshire": {
+    "rainfallMm": 650,
+    "rainfallScore": 25,
+    "livestockDensity": 120,
+    "livestockScore": 50,
+    "prevalenceScore": 38,
+    "baseRiskScore": 21.9
+  },
+  "EastMidlands": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "livestockDensity": 80,
+    "livestockScore": 30,
+    "prevalenceScore": 40,
+    "baseRiskScore": 25
+  },
+  "EastAnglia": {
+    "rainfallMm": 600,
+    "rainfallScore": 25,
+    "livestockDensity": 45,
+    "livestockScore": 15,
+    "prevalenceScore": 20,
+    "baseRiskScore": 12.6
+  },
+  "SouthEast": {
+    "rainfallMm": 640,
+    "rainfallScore": 50,
+    "livestockDensity": 90,
+    "livestockScore": 30,
+    "prevalenceScore": 40,
+    "baseRiskScore": 25
+  }
+}
