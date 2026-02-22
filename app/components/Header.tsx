@@ -31,13 +31,13 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setProductOpen((v) => !v)}
-                className="flex items-center gap-x-1 text-sm font-semibold text-white cursor-pointer hover:text-[#02253e] transition duration-300"
+                className="flex items-center gap-x-1 text-sm font-semibold text-white cursor-pointer hover:text-[#02253e] transition duration-300 "
               >
                 Parasites ▼
               </button>
 
               {productOpen && (
-                <div className="absolute left-0 mt-3 w-90 rounded-xl border bg-white p-3 shadow-lg">
+                <div className="absolute left-0 mt-3 w-90 rounded-xl border bg-white p-3 shadow-lg dark:text-black z-900">
                   <div className="font-semibold">Skin</div>
 
                   <a

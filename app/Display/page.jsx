@@ -7,7 +7,8 @@ import MapPage from "../Map/page";
 export default function Display() {
   const [showModal, setShowModal] = useState(true);
   const [showModal2, setShowModal2] = useState(false);
-  const [AdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  
   
   // State to store weather data passed up from the map component
   const [weatherData, setWeatherData] = useState(null);
@@ -143,30 +144,40 @@ export default function Display() {
                         <span className="font-bold text-gray-900">
                           {weatherData.parasiteRisk.weather.recentRainfall}mm
                         </span>
+
+
+
+
+
                       </div>
                       <div className="pt-3 border-t mt-2">
                         <button
                           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-                          className="w-full flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-medium py-2 transition-colors cursor-pointer"
+                          className="w-full flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-[#1877F2] text-xs font-bold py-2 transition-colors cursor-pointer"
                         >
-                          <div className="flex items-center justify-center h-4 w-4 rounded-full bg-blue-600 text-white text-[10px]">
-                            +
+                          <div className="flex items-center justify-center h-4 w-4 rounded-full bg-[#1877F2] text-white text-[10px]">
+                            {showAdditionalInfo ? '-' : '+'}
                           </div>
-                          View Additional Information
+                        {showAdditionalInfo ? 'Hide Additional Info' : 'Show Additional Info'}
                         </button>
                       </div>
                     </div>
                   </div>
                 )}
 
+
+
+
+
+
                 {/* Current weather section */}
-                <div className="mb-4">
+                <div className="mb-4 dark:text-black">
                   <h4 className="font-semibold text-sm text-gray-700 mb-2">
                     Current Weather
                   </h4>
 
-                  <div className="flex items-center justify-between py-2 bg-blue-50 rounded-lg px-3">
-                    <div className="flex items-center gap-3 flex-1">
+                  <div className="flex items-center justify-between py-2 bg-blue-50 rounded-lg px-3 dark:text-black ">
+                    <div className="flex items-center gap-3 flex-1 ">
                       <img
                         src={weatherData.periods[0].icon}
                         alt={weatherData.periods[0].description}
@@ -189,29 +200,39 @@ export default function Display() {
                     </div>
 
                     <div className="text-right">
-                      <p className="text-3xl font-bold text-blue-600">
+                      <p className="text-3xl font-bold text-[#1877F2]">
                         {weatherData.periods[0].temp}°C
                       </p>
                     </div>
                   </div>
                 </div>
 
+
                 {/* Button- toggle 24-hour forecast */}
                 <button
                   onClick={() => setShowForecast(!showForecast)}
-                  className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                  className="w-full py-2 px-4 bg-[#1877F2] text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium cursor-pointer overflow- relative"
                 >
                   {showForecast
                     ? "Hide 24-Hour Forecast"
                     : "Show 24-Hour Forecast"}
                 </button>
 
+
+
+
                 {/* 24-hour forecast - only shown when showForecast is true */}
                 {showForecast && (
-                  <div className="mt-4 space-y-2 max-h-[40vh] overflow-y-auto">
+                  <div className="mt-4 space-y-2 max-h-[30vh] overflow-y-auto dark:text-black ">
                     <h4 className="font-semibold text-sm text-gray-700 border-b pb-1 sticky top-0 bg-white">
                       Next 24 Hours
                     </h4>
+
+
+
+
+
+                    
 
                     {weatherData.periods.slice(1).map((period, index) => (
                       <div
@@ -242,7 +263,7 @@ export default function Display() {
                         </div>
 
                         <div className="text-right">
-                          <p className="text-xl font-bold text-blue-600">
+                          <p className="text-xl font-bold text-[#1877F2]">
                             {period.temp}°C
                           </p>
                         </div>
@@ -253,12 +274,13 @@ export default function Display() {
               </div>
             )}
           </aside>
-{AdditionalInfo && weatherData?.parasiteRisk && (
-  <div className="w-[320px] bg-white border-r p-6 overflow-y-auto ">
+{showAdditionalInfo && weatherData?.parasiteRisk && (
+<div className="w-[320px] bg-white border-r p-6 overflow-y-auto z-800 max-h-screen">
+
     <h3 className="text-lg font-bold mb-4 text-gray-800 space-y-1 ">
       Additional Information
     </h3>
-    <div className="text-sm text-gray-700  space-y-1 mb-6 border-t pt-4">
+  <div className="text-sm text-gray-700 space-y-1 mb-6 border-t pt-4">
       <p>
         
         {weatherData.parasiteRisk.regionData.riskExplained}
@@ -300,13 +322,12 @@ export default function Display() {
       <h4 className="font-semibold text-gray-800 mb-3">Why risk is at this level</h4>
 
       <div className="space-y-3 text-sm text-gray-700">
-        <p>
-          Annual Rainfall: {weatherData.parasiteRisk.regionData.rainfallMm} mm
         
+          Annual Rainfall: {weatherData.parasiteRisk.regionData.rainfallMm} mm
           <div className="text-xs text-gray-500 mt-1">
           Wet conditions allow parasite larvae to survive on pasture.
           </div>
-        </p>
+        
 
         <p>
          Annual Temperature: {weatherData.parasiteRisk.regionData.temperatureC}°C
@@ -322,7 +343,7 @@ export default function Display() {
       </div>
 
       {/* Most Likely Parasites */}
-      <div className="border-t pt-4 mt-6">
+      <div className="border-t pt-4 mt-6 dark:text-black">
         <h4 className="font-semibold text-gray-800 mb-3">
           Most Likely Parasites (Biology-Based Model)
         </h4>
@@ -428,28 +449,27 @@ export default function Display() {
   </div>
 )}
           {/* Map Area */}
-          <div className="flex-1 relative">
+          <div className="flex-1 relative h-screen z-10">
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
-              <div className="w-full h-full">
                 <MapPage
                   onWeatherDataChange={setWeatherData}
                   onLoadingChange={setWeatherLoading}
+                  className="w-full h-full"
                 />
-              </div>
             </div>
 
-            <div className="absolute top-6 right-6 bg-white shadow rounded p-4 z-500">
+            <div className="absolute top-6 right-6 bg-white shadow rounded  p-4 z-500 dark:text-black" >
               <h3 className="text-sm font-bold mb-3">Risk Level ↑</h3>
-              <div className="space-y-1 text-sm">
-                <div className="text-red-600 mt-1 font-semibold">High</div>
-                <div className="text-orange-400 mt-1 font-semibold">Medium</div>
-                <div className="text-yellow-400 mt-1 font-semibold">Low</div>
+              <div className="space-y-1 text-sm p-3 rounded">
+                <div className="text-red-600 mt-1 font-semibold">Very High</div>
+                <div className="text-orange-600 mt-1 font-semibold">High</div>
+                <div className="text-orange-300 mt-1 font-semibold">Moderate</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white border-t">
+        <div className="bg-white border-t dark:text-black">
           <details className="p-4 border-b">
             <summary className="cursor-pointer font-medium">
               About the data & limitations
@@ -584,7 +604,7 @@ export default function Display() {
 
         {/* First modal - About this map */}
         {showModal && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500">
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500 dark:text-black" >
             <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
               <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                 <i
@@ -627,7 +647,7 @@ export default function Display() {
 
         {/* Second modal - How to use this map */}
         {showModal2 && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500">
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500 dark:text-black">
             <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
               <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                 <i
