@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Parasite Risk Map
+A smart parasite risk visualisation platform developed for Elanco to help farmers identify parasite risks in their geographic area and support proactive livestock health management.
+This project was developed as a university project and demonstrates modern full-stack development using Next.js, interactive mapping, and data-driven risk modelling.
 
-## Getting Started
 
-First, run the development server:
+## Overview
+The Parasite Risk Map enables farmers and agricultural professionals to:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-- Identify parasite risk levels in their region
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-- Make informed livestock treatment decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-- Monitor environmental and seasonal risk factors
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-- Improve parasite prevention strategies
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
+-- Frontend: Next.js (App Router) + TypeScript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-- Styling: CSS / Tailwind
 
-## Deploy on Vercel
+-- Fonts: next/font (Geist)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-- Version Control: Git + GitHub
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-- Tools: VS Code + Prettier (npx prettier . --write)
+
+-- Methodology: Agile (Scrum)
+
+
+## Set Up
+-- Open Visual Studio Code
+
+-- git clone https://github.com/freyaj01/pasture-parasite-risk-map
+
+-- cd pasture-parasite-risk-map
+
+-- npm install
+
+-- npm run dev
+
+-- localhost: 3000
+
+
+## Developers
+-- freyaj01
+
+-- ZarkaHussain (Scrum Master)
+
+-- Harrun01 (Product Owner)
+
+-- dancrowe73
+
+-- nij018
+
+
+
+

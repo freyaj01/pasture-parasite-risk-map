@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@tailwindplus/elements";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Parasite Risk Map",
-  description: "View potential parasite risk in your county based on weather conditions.",
+  description:
+    "View potential parasite risk in your county based on weather conditions.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
