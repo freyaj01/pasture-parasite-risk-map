@@ -208,17 +208,6 @@ def getWeatherRiskScore(recentRainfall, temp, humidity,):
     
 
 if __name__ == '__main__':
-    # Test the function first
-    rainfall = get_recent_rainfall(53.48, -2.24)
-    temp = 8  # Example temperature value
-    humidity = 70  # Example humidity value
-
-    weatherRisk = getWeatherRiskScore(rainfall, temp, humidity)
-
-    print(f"Recent rainfall: {rainfall}mm")
-    print(f"Weather Risk Score: {weatherRisk} points (out of 40)")
-    
-    # Then start the server
     app.run(debug=True, port=8000)
 
 
