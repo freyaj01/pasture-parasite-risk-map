@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef } from "react";import Header from "../components/Header";
+import { useState, useRef, useEffect } from "react";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
 const MapPage = dynamic(() => import("../Map/page"), { ssr: false });
@@ -29,6 +30,12 @@ export default function Display() {
 
   // State to control whether the 24-hour forecast is expanded or collapsed
   const [showForecast, setShowForecast] = useState(false);
+
+  // State for postcode search
+  const [postcodeInput, setPostcodeInput] = useState('');
+  const [postcodeError, setPostcodeError] = useState('');
+  const [postcodeLoading, setPostcodeLoading] = useState(false);
+  const mapRef = useRef(null);
 
   // Helper function to format timestamp into a readable date and time
   const formatTime = (dateString) => {
@@ -437,34 +444,29 @@ export default function Display() {
           {/* Map Area */}
           <div className="flex-1 relative h-screen z-10">
 
-            {/* Postcode Search Barr*/ }
-            <div className="absolute top-6 left-6 z-500 bg-white shadow rounded p-3 flex gap-2 items-center">
+          {/* Postcode Search Bar */}
+          <div className="absolute bottom-6 left-6 z-500 bg-white shadow rounded p-3 flex gap-2 items-center text-black">
+            <h4 className="text-sm font-semibold">Enter Your Postcode:</h4>
             <form onSubmit={handlePostcodeLookup} className="flex gap-2 items-center">
-            <input
-              type="text"
-              value={postcodeInput}
-              onChange={e => setPostcodeInput(e.target.value)}
-              placeholder="e.g. SW1A 1AA"
-              className="border rounded px-3 py-2 text-sm w-36 outline-none focus:border-blue-500"
+              <input
+                type="text"
+                value={postcodeInput}
+                onChange={e => setPostcodeInput(e.target.value)}
+                placeholder="e.g. SW1A 1AA"
+                className="border rounded px-3 py-2 text-sm w-36 outline-none focus:border-blue-900"
               />
               <button type="submit" disabled={postcodeLoading || !postcodeInput}
-              className="bg-[#2171b8] text-white px-3 py-2 rounded text-sm font-medium hover:bg-[#02253e] disabled:opacity-50 transition cursor-pointer">
+              className="bg-[#1877F2] text-white px-3 py-2 rounded text-sm font-medium hover:bg-[#1857F2] disabled:opacity-50 transition cursor-pointer">
                 {postcodeLoading ? '...' : 'Go'}
               </button>
             </form>
             {postcodeError && <p className="text-red-500 text-xs">{postcodeError}</p>}
-            </div>
+          </div>
 
-            <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
-                <MapPage
-                ref ={mapRef} //this is for the postcode bit
-                  onWeatherDataChange={setWeatherData}
-                  onLoadingChange={setWeatherLoading}
-                  className="w-full h-full"
-                />
           <div className="flex-1 relative min-h-[60vh] h-[60vh] sm:h-[70vh] lg:h-screen z-10">
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
               <MapPage
+                ref={mapRef}
                 onWeatherDataChange={setWeatherData}
                 onLoadingChange={setWeatherLoading}
                 className="w-full h-full"
@@ -483,6 +485,7 @@ export default function Display() {
             </div>
           </div>
         </div>
+              </div>
 
         <div className="bg-white border-t dark:text-black" id="additional-info">
           <details className="p-4 border-b">
