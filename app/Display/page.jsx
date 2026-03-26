@@ -33,9 +33,9 @@ export default function Display() {
     <main>
       <Header />
       <div className="min-h-screen bg-slate-50 flex flex-col">
-        <div className="flex flex-1 relative">
+        <div className="flex flex-col md:flex-row flex-1 relative">
           {/* Left Panel shows weather data when a location is clicked on*/}
-          <aside className="w-[320px] bg-white border-r p-6 overflow-y-auto">
+          <aside className="w-full md:w-[320px] bg-white border-r p-6 overflow-y-auto">
             {/* Show a little message before locations are clicked */}
             {!weatherData && !weatherLoading && (
               <div className="text-sm text-gray-500">
@@ -275,7 +275,7 @@ export default function Display() {
             )}
           </aside>
 {showAdditionalInfo && weatherData?.parasiteRisk && (
-<div className="w-[320px] bg-white border-r p-6 overflow-y-auto z-800 max-h-screen">
+<div className="w-full md:w-[320px] bg-white border-r p-6 overflow-y-auto z-800 max-h-screen">
 
     <h3 className="text-lg font-bold mb-4 text-gray-800 space-y-1 ">
       Additional Information
@@ -449,7 +449,7 @@ export default function Display() {
   </div>
 )}
           {/* Map Area */}
-          <div className="flex-1 relative h-screen z-10">
+          <div className="flex-1 relative h-[60vh] md:h-screen z-10">
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
                 <MapPage
                   onWeatherDataChange={setWeatherData}

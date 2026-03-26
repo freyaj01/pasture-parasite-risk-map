@@ -15,10 +15,10 @@ export default function Rotation() {
   }, []);
 
   return (
-    <main className="w-screen h-screen overflow-hidden relative">
-      <div className="find-my-farm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20 backdrop-blur-sm p-10 rounded-lg  cursor-pointer text-white">
-        <h1 className="text-4xl font-bold mb-4">Find My City</h1>
-        <p className="text-lg mb-6">View Potential Parasite Risk.</p>
+    <main className="w-full h-[60vh] md:h-screen overflow-hidden relative">
+      <div className="find-my-farm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20 backdrop-blur-sm p-6 md:p-10 rounded-lg cursor-pointer text-white w-[90%] md:w-auto">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4">Find My City</h1>
+        <p className="text-base md:text-lg mb-6">View Potential Parasite Risk.</p>
         <Link href="/Display">
           <button className="bg-[#2171b8] text-white px-4 py-2 font-bold mb-4 rounded hover:bg-[#02253e] transition duration-300 cursor-pointer">
             View Map
