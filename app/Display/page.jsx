@@ -1,8 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MapPage from "../Map/page";
+
+function LoadingDots() {
+  const [dots, setDots] = useState("");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length < 3 ? prev + "." : ""));
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+  return dots;
+}
 
 export default function Display() {
   const [showModal, setShowModal] = useState(true);
@@ -43,7 +56,7 @@ export default function Display() {
                   Location Info
                 </h2>
                 <p>
-                  Click anywhere on the map to view weather and risk information
+                  Click anywhere on the map to view weather and parasite risk information
                   for that area.
                 </p>
               </div>
@@ -52,10 +65,11 @@ export default function Display() {
             {/* Show loading message in left panel while weather data is being fetched */}
             {weatherLoading && (
               <div className="text-sm text-gray-500">
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">
-                  Loading...
-                </h2>
-                <p>Fetching weather data for this location.</p>
+               <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                
+      Loading weather data<LoadingDots />
+    </h2>
+
               </div>
             )}
 
@@ -63,30 +77,32 @@ export default function Display() {
             {weatherData && weatherData.periods.length > 0 && (
               <div>
                 {/* Display the city and country name */}
-                <h2 className="font-bold text-gray-900">
+              
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="font-bold text-gray-900">
                   {weatherData.city}, {weatherData.country}
                 </h2>
 
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-xs text-gray-500">
-                    {weatherData.lat}, {weatherData.lng}
+                   <p className="text-xs text-gray-500">
+                   {/*  {weatherData.lat}, {weatherData.lng}   */}
                   </p>
+               
                   <button
                     onClick={() => setWeatherData(null)}
-                    className="text-xs text-gray-400 hover:text-red-500 transition-colors"
-                  >
+                    className="text-xs text-gray-400 hover:text-red-500 transition-colors cursor-pointer">
                     Clear selection
                   </button>
                 </div>
 
+   <h4 className="font-semibold text-sm text-gray-700 mb-2">
+                      Parasite Risk
+                    </h4>
                 {/* Parasite Risk Section */}
                 {weatherData.parasiteRisk && (
-                  <div className="mb-4 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border border-orange-200">
-                    <h4 className="font-semibold text-sm text-gray-700 mb-3">
-                      Parasite Risk Assessment
-                    </h4>
+                  <div className="mb-4 p-4 bg-gradient-to-b from-blue-50 to-white-50 rounded-lg border border-blue-200">
+                 
 
-                    <div className="flex items-center justify-between mb-3">
+                     {/*  <div className="flex items-center justify-between mb-3">
                       <span className="text-sm text-gray-600">
                         Total Risk Score
                       </span>
@@ -105,9 +121,9 @@ export default function Display() {
                         {weatherData.parasiteRisk.totalRisk}/100
                       </span>
                     </div>
-
+*/}
                     <div
-                      className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 ${
+                      className={`inline-block px-2 py-1 rounded-full text-sm font-semibold mb-3 ${
                         weatherData.parasiteRisk.riskLevel === "Very High"
                           ? "bg-red-100 text-red-700"
                           : weatherData.parasiteRisk.riskLevel === "High"
@@ -121,6 +137,7 @@ export default function Display() {
                     </div>
 
                     <div className="space-y-2 text-xs">
+                       {/* 
                       <div className="flex justify-between">
                         <span className="text-gray-600">
                           Base Risk (Region):
@@ -137,6 +154,8 @@ export default function Display() {
                           {weatherData.parasiteRisk.weatherRisk}/40
                         </span>
                       </div>
+*/}
+                      
                       <div className="flex justify-between pt-2 border-t">
                         <span className="text-gray-600">
                           Recent Rainfall (14d):
@@ -144,16 +163,11 @@ export default function Display() {
                         <span className="font-bold text-gray-900">
                           {weatherData.parasiteRisk.weather.recentRainfall}mm
                         </span>
-
-
-
-
-
                       </div>
                       <div className="pt-3 border-t mt-2">
                         <button
                           onClick={() => setShowAdditionalInfo((prev) => !prev)}
-                          className="w-full flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-[#1877F2] text-xs font-bold py-2 transition-colors cursor-pointer"
+                          className="w-full flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-[#1877F2] font-bold py-2 transition-colors cursor-pointer "
                         >
                           <div className="flex items-center justify-center h-4 w-4 rounded-full bg-[#1877F2] text-white text-[10px]">
                             {showAdditionalInfo ? '-' : '+'}
@@ -162,13 +176,9 @@ export default function Display() {
                         </button>
                       </div>
                     </div>
+                    
                   </div>
                 )}
-
-
-
-
-
 
                 {/* Current weather section */}
                 <div className="mb-4 dark:text-black">
@@ -211,28 +221,20 @@ export default function Display() {
                 {/* Button- toggle 24-hour forecast */}
                 <button
                   onClick={() => setShowForecast(!showForecast)}
-                  className="w-full py-2 px-4 bg-[#1877F2] text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium cursor-pointer overflow- relative"
+                  className="w-full flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-[#1877F2] text-xs font-bold py-2 transition-colors cursor-pointer"
                 >
                   {showForecast
                     ? "Hide 24-Hour Forecast"
                     : "Show 24-Hour Forecast"}
                 </button>
 
-
-
-
                 {/* 24-hour forecast - only shown when showForecast is true */}
                 {showForecast && (
-                  <div className="mt-4 space-y-2 max-h-[30vh] overflow-y-auto dark:text-black ">
+                  <div className="mt-4 space-y-2 max-h-[40vh] overflow-y-auto dark:text-black ">
                     <h4 className="font-semibold text-sm text-gray-700 border-b pb-1 sticky top-0 bg-white">
                       Next 24 Hours
                     </h4>
 
-
-
-
-
-                    
 
                     {weatherData.periods.slice(1).map((period, index) => (
                       <div
@@ -273,6 +275,7 @@ export default function Display() {
                 )}
               </div>
             )}
+
           </aside>
 {showAdditionalInfo && weatherData?.parasiteRisk && (
 <div className="w-[320px] bg-white border-r p-6 overflow-y-auto z-800 max-h-screen">
@@ -345,7 +348,7 @@ export default function Display() {
       {/* Most Likely Parasites */}
       <div className="border-t pt-4 mt-6 dark:text-black">
         <h4 className="font-semibold text-gray-800 mb-3">
-          Most Likely Parasites (Biology-Based Model)
+          Parasites most likely to appear in these conditions
         </h4>
 
         {(() => {
@@ -469,7 +472,7 @@ export default function Display() {
           </div>
         </div>
 
-        <div className="bg-white border-t dark:text-black">
+        <div className="bg-white border-t dark:text-black" id="additional-info">
           <details className="p-4 border-b">
             <summary className="cursor-pointer font-medium">
               About the data & limitations
@@ -480,8 +483,7 @@ export default function Display() {
                   Population Representation
                 </div>
                 <p className="text-gray-700 mt-1">
-                  The locations shown on this map are reference grazing areas
-                  used as proxies for nearby farmland. They do not represent all
+                  The locations shown on this map do not represent all
                   farms or animals within the region. Risk estimates are based
                   on environmental conditions at these locations and may not
                   reflect local variation within individual fields.
@@ -489,7 +491,7 @@ export default function Display() {
               </div>
               <div className="border-l-4 border-[#02253e] pl-4">
                 <div className="font-semibold text-[#2171b8]">
-                  Environmental Proxies
+                  Environmental Estimates/Proxies
                 </div>
                 <p className="text-gray-700 mt-1">
                   Parasite risk shown on this map is estimated using
@@ -501,11 +503,11 @@ export default function Display() {
               </div>
               <div className="border-l-4 border[#02253e] pl-4">
                 <div className="font-semibold text-[#2171b8]">
-                  Sampling & Data Coverage
+                  Data Sources & Quality
                 </div>
                 <p className="text-gray-700 mt-1">
-                  Weather data is sourced from publicly available APIs and
-                  represents modelled or station-based estimates. Data gaps or
+                  Weather data is sourced from pa ublicly available API and
+                  represents estimates. Data gaps or
                   approximations may exist, particularly for rural or remote
                   areas.
                 </p>
@@ -520,11 +522,10 @@ export default function Display() {
               </div>
               <div className="border-l-4 border-[#02253e] pl-4">
                 <div className="font-semibold text-[#2171b8]">
-                  Rule-Based Risk Scoring
+                  Risk Scoring
                 </div>
                 <p className="text-gray-700 mt-1">
-                  Risk scores are calculated using a simple, transparent
-                  rule-based model. The thresholds used are illustrative and are
+                  Risk scores are calculated using a simple rule-based model. The thresholds used are calculated using factors and are
                   intended to support discussion rather than provide definitive
                   guidance.
                 </p>
@@ -535,12 +536,13 @@ export default function Display() {
                 </div>
                 <p className="text-gray-700 mt-1">
                   This tool is designed to support discussion and
-                  decision-making between farmers, vets, and advisors. It should
-                  not be used as a sole basis for treatment decisions.
+                  decision-making between farmers and vets. It should
+                  not be used as a sole basis for treatment or decisions.
                 </p>
               </div>
             </div>
-          </details>
+          </details> 
+          {/* 
           <details className="p-4">
             <summary className="cursor-pointer font-medium">
               Feedback? What could we improve on
@@ -600,7 +602,8 @@ export default function Display() {
               </button>
             </div>
           </details>
-        </div>
+*/}
+           </div>
 
         {/* First modal - About this map */}
         {showModal && (
@@ -615,26 +618,43 @@ export default function Display() {
               </h3>
               <p className="text-sm text-gray-600 mb-4">
                 This map shows an estimated parasite risk level based on
-                environmental conditions. It is meant to be used as a guide to
+                environmental conditions.
+                 <br />
+                <br />
+                It is meant to be used as a guide to
                 help you understand potential parasite risk in your area, but
                 should not be used as the sole source of information for making
-                decisions about parasite management.
+                decisions.
                 <br />
                 <br />
                 Always consult with your veterinarian for specific advice about
                 parasite control on your farm.
               </p>
-              <div className="flex justify-end gap-2">
+              <div className="flex justify-end gap-2"> 
                 <button
-                  className="px-4 py-2 rounded bg-gray-100 font-semibold hover:bg-gray-200 transition duration-300"
-                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 rounded bg-[#2171b8] text-white hover:bg-[#02253e] font-semibold cursor-pointer transition duration-300"
+                   onClick={() => {
+                    setShowModal(false);
+
+                    setTimeout(() => {
+    const section = document.getElementById("additional-info");
+    const details = section?.querySelector("details");
+
+    section?.scrollIntoView({ behavior: "smooth" });
+
+    if (details) {
+      details.open = true;
+    }
+  }, 200);
+                  }}
                 >
-                  More info
+                  More info 
+
                 </button>
                 <button
                   onClick={() => {
                     setShowModal(false);
-                    setShowModal2(true);
+                  {/*  setShowModal2(true);*/}
                   }}
                   className="px-4 py-2 rounded bg-[#2171b8] text-white hover:bg-[#02253e] font-semibold cursor-pointer transition duration-300"
                 >
@@ -645,7 +665,7 @@ export default function Display() {
           </div>
         )}
 
-        {/* Second modal - How to use this map */}
+        {/* Second modal - How to use this map 
         {showModal2 && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-500 dark:text-black">
             <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
@@ -672,9 +692,12 @@ export default function Display() {
                   Continue
                 </button>
               </div>
+              
             </div>
+            
           </div>
         )}
+  */}
       </div>
       <Footer />
     </main>
