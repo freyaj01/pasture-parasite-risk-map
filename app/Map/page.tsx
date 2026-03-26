@@ -55,10 +55,15 @@ function MapComponent({ onWeatherDataChange, onLoadingChange }: MapComponentProp
       }
 
       // initialise map and set default view to be UK
-      const map = L.map("map", { scrollWheelZoom: false }).setView(
-        [55.3781, -3.436],
-        6
-      );
+    const map = L.map("map", {
+  scrollWheelZoom: false,
+  preferCanvas: true,        // add this
+               // add this
+}).setView([55.3781, -3.436], 6);
+
+// Force Leaflet to use pointer events instead of mouse events
+delete (L.Browser as any).pointer;
+(L.Browser as any).pointer = true;
 
       // Add the base map tiles from CartoDB
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
