@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import Header from "../components/Header";
+import { useState, useRef } from "react";import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MapPage from "../Map/page";
 
@@ -8,6 +7,10 @@ export default function Display() {
   const [showModal, setShowModal] = useState(true);
   const [showModal2, setShowModal2] = useState(false);
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [postcodeInput, setPostcodeInput] = useState('')
+  const [postcodeError, setPostcodeError] = useState('')
+  const [postcodeLoading, setPostcodeLoading] = useState(false)
+  const mapRef = useRef(null)
   
   
   // State to store weather data passed up from the map component
@@ -28,6 +31,24 @@ export default function Display() {
       minute: "2-digit",
     });
   };
+
+  async function handlePostcodeLookup(e) {
+    e.preventDefault()
+    setPostcodeError('')
+    setPostcodeLoading(true)
+    try{
+      const res = await fetch(`/postcodeAPI?postcode=${encodeURIComponent(postcodeInput.trim())}`)
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Lookup failed')
+        mapRef.current?.flyTo(data.latitude, data.longitude)
+    } catch (err) {
+      setPostcodeError(err.message)
+    }
+    finally{
+      setPostcodeLoading(false)
+
+    }
+  }
 
   return (
     <main>
@@ -450,8 +471,28 @@ export default function Display() {
 )}
           {/* Map Area */}
           <div className="flex-1 relative h-screen z-10">
+
+            {/* Postcode Search Barr*/ }
+            <div className="absolute top-6 left-6 z-500 bg-white shadow rounded p-3 flex gap-2 items-center">
+            <form onSubmit={handlePostcodeLookup} className="flex gap-2 items-center">
+            <input
+              type="text"
+              value={postcodeInput}
+              onChange={e => setPostcodeInput(e.target.value)}
+              placeholder="e.g. SW1A 1AA"
+              className="border rounded px-3 py-2 text-sm w-36 outline-none focus:border-blue-500"
+              />
+              <button type="submit" disabled={postcodeLoading || !postcodeInput}
+              className="bg-[#2171b8] text-white px-3 py-2 rounded text-sm font-medium hover:bg-[#02253e] disabled:opacity-50 transition cursor-pointer">
+                {postcodeLoading ? '...' : 'Go'}
+              </button>
+            </form>
+            {postcodeError && <p className="text-red-500 text-xs">{postcodeError}</p>}
+            </div>
+
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
                 <MapPage
+                ref ={mapRef} //this is for the postcode bit
                   onWeatherDataChange={setWeatherData}
                   onLoadingChange={setWeatherLoading}
                   className="w-full h-full"
