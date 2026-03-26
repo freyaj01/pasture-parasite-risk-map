@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <main>
       <footer className="border-t border-gray-300 bg-[#0072ce] w-full">
-        <div className="mx-auto max-w-7xl px-2 py-6 lg:px-8 ">
+        <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between ">
             <div>
               <p className="mb-2 text-sm font-semibold text-white">
@@ -153,7 +153,7 @@ export default function Footer() {
               </a>
             </div>
 
-            <p className="text-xs text-white">
+            <p className="text-xs text-white mt-2 md:mt-0 md:text-right md:max-w-xs">   
               Elanco and the diagonal bar logo are trademarks of Elanco or its
               affiliates. © 2026 Elanco. (University Project)
             </p>

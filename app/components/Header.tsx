@@ -111,7 +111,7 @@ export default function Header() {
         </nav>
         {mobileOpen && (
           <div className="fixed inset-0 z-50 bg-black/40">
-            <div className="fixed right-0 top-0 h-full w-72 bg-white p-6 shadow-lg">
+            <div className="fixed right-0 top-0 h-full w-72 bg-white p-6 shadow-lg text-black">
               <button
                 className="mb-6 text-right cursor-pointer text-1xl font-bold"
                 onClick={() => setMobileOpen(false)}
