@@ -1,9 +1,10 @@
 # Parasite Risk Map
+
 A smart parasite risk visualisation platform developed for Elanco to help farmers identify parasite risks in their geographic area and support proactive livestock health management.
 This project was developed as a university project and demonstrates modern full-stack development using Next.js, interactive mapping, and data-driven risk modelling.
 
-
 ## Overview
+
 The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- Identify parasite risk levels in their region
@@ -14,9 +15,8 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- Improve parasite prevention strategies
 
-
-
 ## Tech Stack
+
 -- Frontend: Next.js (App Router) + TypeScript
 
 -- Styling: CSS / Tailwind
@@ -29,8 +29,8 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- Methodology: Agile (Scrum)
 
-
 ## Set Up
+
 -- Open Visual Studio Code
 
 -- git clone https://github.com/freyaj01/pasture-parasite-risk-map
@@ -43,8 +43,8 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 
 -- localhost: 3000
 
-
 ## Developers
+
 -- freyaj01
 
 -- ZarkaHussain (Scrum Master)
@@ -54,7 +54,3 @@ The Parasite Risk Map enables farmers and agricultural professionals to:
 -- dancrowe73
 
 -- nij018
-
-
-
-

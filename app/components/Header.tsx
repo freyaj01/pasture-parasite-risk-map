@@ -97,7 +97,7 @@ export default function Header() {
             </a>
             <a
               className="text-sm font-semibold text-white hover:text-[#02253e] transition duration-300"
-              href="#"
+              href="/Info"
             >
               Additional Info
             </a>
@@ -107,14 +107,14 @@ export default function Header() {
           <div className="fixed inset-0 z-50 bg-black/40">
             <div className="fixed right-0 top-0 h-full w-72 bg-[#0072ce] p-6 shadow-lg">
               <button
-                className="mb-6 text-right cursor-pointer text-1xl font-bold"
+                className="mb-6 text-right cursor-pointer text-1xl font-bold text-white hover:text-[#02253e] transition duration-300"
                 onClick={() => setMobileOpen(false)}
               >
                 ✕
               </button>
 
               <button
-                className="block w-full text-left font-bold cursor-pointer"
+                className="block w-full text-left font-semibold cursor-pointer text-white hover:text-[#02253e] transition duration-300r"
                 onClick={() => setProductOpen((v) => !v)}
               >
                 Parasites
@@ -122,40 +122,46 @@ export default function Header() {
 
               {productOpen && (
                 <div className="ml-3 mt-2 space-y-2 text-sm">
-                  <div className="font-bold">Skin</div>
-                  <a className="block underline hover:text-black" href="#">
+                  <div className="font-bold text-white">Skin</div>
+                  <a className="block underline hover:text-black text-white" href="#">
                     Ectoparasites (Lice, Mites, Ticks)
                   </a>
-                  <a className="block underline hover:text-black" href="#">
+                  <a className="block underline hover:text-black text-white" href="#">
                     Flies
                   </a>
-                  <div className="font-bold">Lung & Trachea</div>
-                  <a className="block underline hover:text-black" href="#">
+                  <div className="font-bold text-white">Lung & Trachea</div>
+                  <a className="block underline hover:text-black text-white" href="#">
                     Dictyocalulusviviparus (Lungworm)
                   </a>
-                  <div className="font-bold">Gastrointestinal</div>
-                  <a className="block underline hover:text-black" href="#">
+                  <div className="font-bold text-white" >Gastrointestinal</div>
+                  <a className="block underline hover:text-black text-white" href="#">
                     Nematodes (Roundworm)
                   </a>
-                  <a className="block underline hover:text-black" href="#">
+                  <a className="block underline hover:text-black text-white" href="#">
                     Cestodes (Tapeworm)
                   </a>
-                  <a className="block underline hover:text-black" href="#">
+                  <a className="block underline hover:text-black text-white" href="#">
                     Protozoa (Coccidia, Giardia)
                   </a>
-                  <div className="font-bold">Liver</div>
-                  <a className="block underline hover:text-black" href="#">
+                  <div className="font-bold text-white">Liver</div>
+                  <a className="block underline hover:text-black text-white" href="#">
                     Fasciola hepatica (Liver Fluke)
                   </a>
                 </div>
               )}
-              <a className="mt-4 block font-semibold" href="https://www.elanco.com/us/about-us">
+              <a
+                className="mt-4 block font-semibold text-white hover:text-[#02253e] transition duration-300"
+                href="https://www.elanco.com/us/about-us"
+              >
                 About Us
               </a>
-              <a className="mt-4 block font-semibold" href="#">
+            
+              <a className="mt-4 block font-semibold text-white hover:text-[#02253e] transition duration-300" href="/Info">
                 Additional Info
+             
               </a>
-            </div>
+         
+      </div>
           </div>
         )}
       </header>
