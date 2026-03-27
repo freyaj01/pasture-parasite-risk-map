@@ -109,6 +109,18 @@ export default function Display() {
                       <div className="flex justify-between">
                         <span className="text-gray-600">Base Risk (Region):</span>
                         <span className="font-bold text-gray-900">{weatherData.parasiteRisk.baseRisk}/60</span>
+                        {weatherData.parasiteRisk.breakdown && (
+                          <div className="mt-2 space-y-1 text-xs border-t pt-2">
+                            <div className="flex justify-between">
+                              <span className="text-gray-500">↳ Rainfall Score:</span>
+                              <span className="font-medium">{weatherData.parasiteRisk.breakdown.rainfallScore}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">↳ Elevation Score:</span>
+                                <span className="font-medium">{weatherData.parasiteRisk.breakdown.elevationScore}</span>
+                                </div>
+                                </div>
+                        )}
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Weather Risk (Current):</span>
