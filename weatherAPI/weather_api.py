@@ -207,6 +207,7 @@ def calculate_base_risk(region, lat, lon):
         return None, None, None
 
     rainfall_score  = REGION_DATA[region]["rainfallScore"]
+    base_risk_score = REGION_DATA[region]["baseRiskScore"]
     elevation_score = get_elevation_score(lat, lon)
 
     base_raw   = (rainfall_score * 0.5) + (elevation_score * 0.5)
