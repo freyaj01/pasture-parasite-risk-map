@@ -74,7 +74,13 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       }
 
       // Add a new marker at the clicked location
-      markerRef.current = L.marker([lat, lng]).addTo(map);
+      markerRef.current = L.marker([lat, lng], { draggable:true }).addTo(map);
+      markerRef.current.on('dragend', (event: any) => {
+        const position = event.target.getLatLng();
+        handleLocationSelect(position.lat, position.lng);
+
+      });
+
 
       // Tell the parent Display component that loading has started
       if (onLoadingChange) onLoadingChange(true);
@@ -164,6 +170,7 @@ delete (L.Browser as any).pointer;
 
     // useEffect runs once when component loads to initialise map
     useEffect(() => {
+      if (mapInstance.current) return;
       // import Leaflet library only on client side (not during server-side rendering)
       import("leaflet").then((L) => {
 
@@ -176,12 +183,40 @@ delete (L.Browser as any).pointer;
         }
 
         // initialise map and set default view to be UK
-        const map = L.map("map", { scrollWheelZoom: false }).setView(
+        const map = L.map("map", { scrollWheelZoom: true, dragging: true }).setView(
           [55.3781, -3.436],
           6
         );
 
         mapInstance.current = map;
+
+map.dragging.enable();
+
+const mapDiv = document.getElementById('map');
+if (mapDiv) {
+  let isDragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  mapDiv.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    map.panBy([-dx, -dy], { animate: false });
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+}
 
         // Add the base map tiles from CartoDB
         L.tileLayer(
@@ -214,13 +249,16 @@ delete (L.Browser as any).pointer;
         // Cleanup function- runs when component unmounts
         return () => {
           map.remove();
+          mapInstance.current = null;
         };
       });
     }, [onWeatherDataChange, onLoadingChange]);
 
+    
+
     return (
       <div className="relative w-full h-full">
-        <div id="map" className="w-full h-full z-10" />
+        <div id="map" className="w-full h-full z-10 cursor-grab active:cursor-grabbing" />
       </div>
     );
   }
