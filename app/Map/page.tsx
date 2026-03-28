@@ -56,10 +56,8 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       if (lat < 52 && lng < -2) return "SouthWest";
       if (lat >= 52 && lat < 53.5 && lng > 0.5) return "EastAnglia";
       if (lat < 52 && lng >= -1) return "SouthEast";
-      if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3)
-        return "WestMidlands";
-      if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5)
-        return "EastMidlands";
+      if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3) return "WestMidlands";
+      if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5) return "EastMidlands";
       return "EastMidlands";
     };
 
@@ -74,14 +72,12 @@ const MapComponent = forwardRef<any, MapComponentProps>(
         map.removeLayer(markerRef.current);
       }
 
-      // Add a new marker at the clicked location
-      markerRef.current = L.marker([lat, lng], { draggable:true }).addTo(map);
+      // Add a new marker at the clicked location with draggable enabled
+      markerRef.current = L.marker([lat, lng], { draggable: true, autoPan: true }).addTo(map);
       markerRef.current.on('dragend', (event: any) => {
         const position = event.target.getLatLng();
         handleLocationSelect(position.lat, position.lng);
-
       });
-
 
       // Tell the parent Display component that loading has started
       if (onLoadingChange) onLoadingChange(true);
@@ -128,46 +124,13 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       }
     };
 
-    // expose function to parent (postcode search uses this)
+    // expose flyTo function to parent (postcode search uses this)
     useImperativeHandle(ref, () => ({
       flyTo(lat: number, lng: number) {
         if (mapInstance.current) {
           mapInstance.current.flyTo([lat, lng], 13);
         }
-        // initialise map and set default view to be UK
-        const map = L.map("map", {
-          scrollWheelZoom: false,
-          preferCanvas: true, // add this
-          // add this
-        }).setView([55.3781, -3.436], 6);
-
-        // Force Leaflet to use pointer events instead of mouse events
-        delete (L.Browser as any).pointer;
-        (L.Browser as any).pointer = true;
-
-        // Add the base map tiles from CartoDB
-        L.tileLayer(
-          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-          {
-            attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
-        ).addTo(map);
-
-        // Fix for the default marker icon not displaying properly in production
-        const DefaultIcon = L.icon({
-          iconUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-          iconRetinaUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-          shadowUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41],
-        });
-        L.Marker.prototype.options.icon = DefaultIcon;
+        // automatically fetch weather + risk data for the postcode location
         handleLocationSelect(lat, lng);
       },
     }));
@@ -179,7 +142,7 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       import("leaflet").then((L) => {
         leafletRef.current = L;
 
-        // checkss if map container is already initialised and remove it if so
+        // checks if map container is already initialised and remove it if so
         const container = L.DomUtil.get("map");
         if (container) {
           (container as any)._leaflet_id = null;
@@ -193,33 +156,35 @@ const MapComponent = forwardRef<any, MapComponentProps>(
 
         mapInstance.current = map;
 
-map.dragging.enable();
+        // ensure dragging is enabled
+        map.dragging.enable();
 
-const mapDiv = document.getElementById('map');
-if (mapDiv) {
-  let isDragging = false;
-  let lastX = 0;
-  let lastY = 0;
+        // manual drag handler to fix Safari/Mac trackpad drag issues
+        const mapDiv = document.getElementById('map');
+        if (mapDiv) {
+          let isDragging = false;
+          let lastX = 0;
+          let lastY = 0;
 
-  mapDiv.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
-  });
+          mapDiv.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+          });
 
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const dx = e.clientX - lastX;
-    const dy = e.clientY - lastY;
-    lastX = e.clientX;
-    lastY = e.clientY;
-    map.panBy([-dx, -dy], { animate: false });
-  });
+          document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            map.panBy([-dx, -dy], { animate: false });
+          });
 
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-  });
-}
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+          });
+        }
 
         // Add the base map tiles from CartoDB
         L.tileLayer(
@@ -232,12 +197,9 @@ if (mapDiv) {
 
         // Fix for the default marker icon not displaying properly in production
         const DefaultIcon = L.icon({
-          iconUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-          iconRetinaUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-          shadowUrl:
-            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+          iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+          iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+          shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
           iconSize: [25, 41],
           iconAnchor: [12, 41],
           popupAnchor: [1, -34],
@@ -259,8 +221,6 @@ if (mapDiv) {
         };
       });
     }, [onWeatherDataChange, onLoadingChange]);
-
-    
 
     return (
       <div className="relative w-full h-full">
