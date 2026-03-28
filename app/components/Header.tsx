@@ -42,46 +42,46 @@ export default function Header() {
 
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Ectoparasites"
                   >
                     Ectoparasites (Lice, Mites, Ticks)
                   </a>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Flies"
                   >
                     Flies
                   </a>
                   <div className="font-semibold">Lung & Trachea</div>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Lungworm"
                   >
                     Dictyocalulusviviparus (Lungworm)
                   </a>
                   <div className="font-semibold">Gastrointestinal</div>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Nematodes"
                   >
                     Nematodes (Roundworm)
                   </a>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Tapeworm"
                   >
                     Cestodes (Tapeworm)
                   </a>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Coccidia"
                   >
                     Protozoa (Coccidia, Giardia)
                   </a>
                   <div className="font-semibold">Liver</div>
                   <a
                     className="block rounded px-3 py-2 hover:bg-gray-100 underline"
-                    href="#"
+                    href="/Liver_Fluke"
                   >
                     Fasciola hepatica (Liver Fluke)
                   </a>
@@ -123,28 +123,49 @@ export default function Header() {
               {productOpen && (
                 <div className="ml-3 mt-2 space-y-2 text-sm">
                   <div className="font-bold text-white">Skin</div>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Ectoparasites"
+                  >
                     Ectoparasites (Lice, Mites, Ticks)
                   </a>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Flies"
+                  >
                     Flies
                   </a>
                   <div className="font-bold text-white">Lung & Trachea</div>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Lungworm"
+                  >
                     Dictyocalulusviviparus (Lungworm)
                   </a>
-                  <div className="font-bold text-white" >Gastrointestinal</div>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <div className="font-bold text-white">Gastrointestinal</div>
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Nematodes"
+                  >
                     Nematodes (Roundworm)
                   </a>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Tapeworm"
+                  >
                     Cestodes (Tapeworm)
                   </a>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Coccidia"
+                  >
                     Protozoa (Coccidia, Giardia)
                   </a>
-                  <div className="font-bold text-white">Liver</div>
-                  <a className="block underline hover:text-black text-white" href="#">
+                  <div className="font-bold ">Liver</div>
+                  <a
+                    className="block underline hover:text-black text-white"
+                    href="/Liver_Fluke"
+                  >
                     Fasciola hepatica (Liver Fluke)
                   </a>
                 </div>
@@ -155,13 +176,14 @@ export default function Header() {
               >
                 About Us
               </a>
-            
-              <a className="mt-4 block font-semibold text-white hover:text-[#02253e] transition duration-300" href="/Info">
+
+              <a
+                className="mt-4 block font-semibold text-white hover:text-[#02253e] transition duration-300"
+                href="/Info"
+              >
                 Additional Info
-             
               </a>
-         
-      </div>
+            </div>
           </div>
         )}
       </header>

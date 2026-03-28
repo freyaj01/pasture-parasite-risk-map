@@ -44,7 +44,6 @@ interface MapComponentProps {
 
 const MapComponent = forwardRef<any, MapComponentProps>(
   ({ onWeatherDataChange, onLoadingChange }, ref) => {
-
     const mapInstance = useRef<any>(null);
     const markerRef = useRef<any>(null);
     const leafletRef = useRef<any>(null);
@@ -57,8 +56,10 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       if (lat < 52 && lng < -2) return "SouthWest";
       if (lat >= 52 && lat < 53.5 && lng > 0.5) return "EastAnglia";
       if (lat < 52 && lng >= -1) return "SouthEast";
-      if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3) return "WestMidlands";
-      if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5) return "EastMidlands";
+      if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3)
+        return "WestMidlands";
+      if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5)
+        return "EastMidlands";
       return "EastMidlands";
     };
 
@@ -82,7 +83,7 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       try {
         // Make a request to our Python Flask backend API with the clicked coordinates
         const weatherResponse = await fetch(
-          `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`
+          `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`,
         );
 
         // Check if the response was successful
@@ -101,7 +102,7 @@ const MapComponent = forwardRef<any, MapComponentProps>(
         const region = getRegionFromCoordinates(lat, lng);
 
         const riskResponse = await fetch(
-          `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
+          `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`,
         );
 
         if (riskResponse.ok) {
@@ -111,7 +112,6 @@ const MapComponent = forwardRef<any, MapComponentProps>(
 
         // Send weather data up to the parent Display component to show in the sidebar
         if (onWeatherDataChange) onWeatherDataChange(forecast);
-
       } catch (err) {
         // If there's an error log it and clear the weather data in the parent
         console.error("Error fetching weather:", err);
@@ -128,45 +128,48 @@ const MapComponent = forwardRef<any, MapComponentProps>(
         if (mapInstance.current) {
           mapInstance.current.flyTo([lat, lng], 13);
         }
-      // initialise map and set default view to be UK
-    const map = L.map("map", {
-  scrollWheelZoom: false,
-  preferCanvas: true,        // add this
-               // add this
-}).setView([55.3781, -3.436], 6);
+        // initialise map and set default view to be UK
+        const map = L.map("map", {
+          scrollWheelZoom: false,
+          preferCanvas: true, // add this
+          // add this
+        }).setView([55.3781, -3.436], 6);
 
-// Force Leaflet to use pointer events instead of mouse events
-delete (L.Browser as any).pointer;
-(L.Browser as any).pointer = true;
+        // Force Leaflet to use pointer events instead of mouse events
+        delete (L.Browser as any).pointer;
+        (L.Browser as any).pointer = true;
 
-      // Add the base map tiles from CartoDB
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      }).addTo(map);
+        // Add the base map tiles from CartoDB
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+          {
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          },
+        ).addTo(map);
 
-      // Fix for the default marker icon not displaying properly in production
-      const DefaultIcon = L.icon({
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-        iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-      L.Marker.prototype.options.icon = DefaultIcon;
-
-        // 🔥 automatically fetch data (no click needed)
+        // Fix for the default marker icon not displaying properly in production
+        const DefaultIcon = L.icon({
+          iconUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+          iconRetinaUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        });
+        L.Marker.prototype.options.icon = DefaultIcon;
         handleLocationSelect(lat, lng);
-      }
+      },
     }));
 
     // useEffect runs once when component loads to initialise map
     useEffect(() => {
       // import Leaflet library only on client side (not during server-side rendering)
       import("leaflet").then((L) => {
-
         leafletRef.current = L;
 
         // checkss if map container is already initialised and remove it if so
@@ -178,7 +181,7 @@ delete (L.Browser as any).pointer;
         // initialise map and set default view to be UK
         const map = L.map("map", { scrollWheelZoom: false }).setView(
           [55.3781, -3.436],
-          6
+          6,
         );
 
         mapInstance.current = map;
@@ -188,19 +191,22 @@ delete (L.Browser as any).pointer;
           "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
           {
             attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          }
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          },
         ).addTo(map);
 
         // Fix for the default marker icon not displaying properly in production
         const DefaultIcon = L.icon({
-          iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-          iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+          iconUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+          iconRetinaUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
           iconSize: [25, 41],
           iconAnchor: [12, 41],
           popupAnchor: [1, -34],
-          shadowSize: [41, 41]
+          shadowSize: [41, 41],
         });
 
         L.Marker.prototype.options.icon = DefaultIcon;
@@ -223,7 +229,7 @@ delete (L.Browser as any).pointer;
         <div id="map" className="w-full h-full z-10" />
       </div>
     );
-  }
+  },
 );
 
 // Export component with server-side rendering disabled (need this for Leaflet)

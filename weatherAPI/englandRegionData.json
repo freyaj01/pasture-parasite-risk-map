@@ -2,90 +2,73 @@
   "NorthWest": {
     "rainfallMm": 1300,
     "temperatureC": 10,
-    "humidityPercent": 80,
+    "humidityPercent": 85,
     "rainfallScore": 75,
-    "livestockDensity": 180,
-    "livestockScore": 75,
     "prevalenceScore": 75,
     "baseRiskScore": 45,
-    "riskExplained": "The North West has the highest risk of pasture parasite infection due to its high rainfall and livestock density. Farmers in this region should be particularly vigilant in monitoring their pastures and implementing effective parasite control measures."
+    "riskExplained": "The North West gets a lot more rainfall than almost anywhere else in England, which results in a high fluke and nematode risk. Wet ground persists well into spring and autumn, extending the time for parasites to lay eggs."
   },
   "SouthWest": {
     "rainfallMm": 1250,
-    "temperatureC": 10,
+    "temperatureC": 11,
     "humidityPercent": 83,
     "rainfallScore": 75,
-    "livestockDensity": 160,
-    "livestockScore": 75,
     "prevalenceScore": 75,
     "baseRiskScore": 45,
-    "riskExplained": "The South West also has a high risk of pasture parasite infection, with significant rainfall and livestock density. Farmers in this region should prioritize regular pasture monitoring and consider strategic deworming programs to manage parasite risks effectively."
+    "riskExplained": "The South West is one of the highest risk regions in England for liver fluke, with mild winters and high rainfall keeping mud snail habitats wet for much of the year. Nematode presence is also evident through spring and autumn."
   },
   "WestMidlands": {
     "rainfallMm": 800,
     "temperatureC": 10,
     "humidityPercent": 80,
     "rainfallScore": 50,
-    "livestockDensity": 140,
-    "livestockScore": 50,
     "prevalenceScore": 50,
     "baseRiskScore": 30,
-    "riskExplained": "The West Midlands has a moderate risk of pasture parasite infection. While the rainfall and livestock density are not as high as in the North West and South West, farmers should still be proactive in monitoring their pastures and implementing parasite control measures to prevent outbreaks."
+    "riskExplained": "The West Midlands sits in a mid-range risk bracket. Rainfall is moderate and conditions are generally favourable for nematode development through warmer months. Fluke risk is lower than the western regions but worth monitoring in wet years."
   },
   "Yorkshire": {
     "rainfallMm": 800,
-    "temperatureC": 10,
+    "temperatureC": 9,
     "humidityPercent": 80,
     "rainfallScore": 25,
-    "livestockDensity": 120,
-    "livestockScore": 50,
     "prevalenceScore": 38,
     "baseRiskScore": 21.9,
-    "riskExplained": "Yorkshire has a lower risk of pasture parasite infection compared to the North West and South West, but it still requires attention. Farmers should maintain good pasture management practices and consider regular parasite monitoring to keep risks at bay."
+    "riskExplained": "Yorkshire sits in the middle, the upland western areas see higher rainfall and fluke prescence, while the drier eastern plains carry lower risk. Nematode risk peaks in spring and late summer across most of the region."
   },
   "EastMidlands": {
     "rainfallMm": 700,
     "temperatureC": 10,
-    "humidityPercent": 79,
+    "humidityPercent": 78,
     "rainfallScore": 50,
-    "livestockDensity": 80,
-    "livestockScore": 30,
     "prevalenceScore": 40,
     "baseRiskScore": 25,
-    "riskExplained": "The East Midlands has a moderate risk of pasture parasite infection. With moderate rainfall and livestock density, farmers should focus on regular pasture inspections and consider strategic deworming to manage parasite risks effectively."
+    "riskExplained": "The East Midlands is generally lower risk than western regions, though nematode and coccidia prescense remains in mixed farming areas. Liver fluke risk is low due to drier conditions."
   },
   "EastAnglia": {
     "rainfallMm": 600,
     "temperatureC": 11,
-    "humidityPercent": 80,
+    "humidityPercent": 76,
     "rainfallScore": 25,
-    "livestockDensity": 45,
-    "livestockScore": 15,
     "prevalenceScore": 20,
     "baseRiskScore": 12.6,
-    "riskExplained": "East Anglia has a lower risk of pasture parasite infection due to its lower rainfall and livestock density. However, farmers should still practice good pasture management and monitor for parasites to prevent any potential outbreaks."
+    "riskExplained": "East Anglia is the driest region in England, which keeps most pasture parasite risk relatively low. Liver fluke is uncommon here. Nematodes can still be an issue in wetter summers, but overall burden is lower than western regions."
   },
   "SouthEast": {
-    "rainfallMm": 550,
+    "rainfallMm": 780,
     "temperatureC": 11,
     "humidityPercent": 75,
     "rainfallScore": 50,
-    "livestockDensity": 90,
-    "livestockScore": 30,
     "prevalenceScore": 40,
     "baseRiskScore": 25,
-    "riskExplained": "The South East has a moderate risk of pasture parasite infection. With moderate rainfall and livestock density, farmers should focus on regular pasture inspections and consider strategic deworming to manage parasite risks effectively."
+    "riskExplained": "The South East is generally low to moderate risk. Drier summers keep fluke pressure low, though nematodes can build up during wetter periods. Blowfly strike risk is worth watching through the warmer months."
   },
-
   "NorthEast": {
     "rainfallMm": 800,
     "temperatureC": 9,
     "humidityPercent": 82,
     "rainfallScore": 50,
-    "livestockDensity": 100,
-    "livestockScore": 50,
     "prevalenceScore": 50,
     "baseRiskScore": 30,
-    "riskExplained": "The North East has a moderate risk of pasture parasite infection. With moderate rainfall and livestock density, farmers should focus on regular pasture inspections and consider strategic deworming to manage parasite risks effectively."
+    "riskExplained": "The North East sees moderate rainfall and cooler temperatures, which slightly compresses the parasite development window compared to southern regions. Nematode and fluke risk are both present, particularly in wetter upland areas."
   }
 }
