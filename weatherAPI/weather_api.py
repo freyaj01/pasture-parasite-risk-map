@@ -154,7 +154,7 @@ def getWeatherRiskScore(recentRainfall, temp, humidity):
 
 
 # ─────────────────────────────────────────────
-# NEW: ELEVATION
+# ELEVATION
 # Source: Open-Meteo elevation API — same provider
 # already used for weather, no extra API key needed.
 # Scientific basis: SCOPS Nematodirus forecast —
@@ -190,30 +190,81 @@ def get_elevation_score(lat, lon):
 
 
 # ─────────────────────────────────────────────
-# UPDATED BASE RISK
+# SOIL MOISTURE
+# Source: Open-Meteo current weather API — same
+# provider already used, no extra key needed.
+# Scientific basis: ScienceDirect (2002) —
+# soil moisture >20% sufficient to support full
+# larval development and translation to pasture
+# (H. contortus and T. colubriformis)
+# ─────────────────────────────────────────────
+
+def get_soil_moisture_score(lat, lon):
+    """
+    Fetches topsoil moisture (0-1cm) from Open-Meteo.
+    Returned as volumetric fraction (0.0 to 1.0)
+    Converted to percentage for scoring.
+    Higher soil moisture = larvae survive and migrate
+    more easily up grass stems = higher risk.
+    Falls back to 50 (neutral) if API fails.
+    """
+    try:
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?"
+            f"latitude={lat}&longitude={lon}&"
+            f"current=soil_moisture_0_to_1cm"
+        )
+        data = json.load(url_request.urlopen(url))
+        moisture = data["current"]["soil_moisture_0_to_1cm"]
+
+        # Convert fraction to percentage
+        moisture_pct = moisture * 100
+        print(f"Soil moisture at ({lat}, {lon}): {moisture_pct:.1f}%")
+
+        # Based on ScienceDirect (2002) — >20% sufficient
+        # for full larval development and translation
+        if moisture_pct > 40:   return 100  # Very wet — optimal larval survival
+        if moisture_pct > 20:   return 75   # Above critical threshold — active development
+        if moisture_pct > 10:   return 40   # Marginal — limited larval activity
+        return 15                            # Dry — larvae unlikely to survive or migrate
+
+    except Exception as e:
+        print("Error fetching soil moisture:", e)
+        return 50  # Neutral fallback if API fails
+
+
+# ─────────────────────────────────────────────
+# BASE RISK
 # Was: rainfallScore (50%) + livestockScore (30%) + prevalenceScore (20%)
-# Now: rainfallScore (50%) + elevationScore (50%)
-# Livestock and prevalence removed — elevation replaces them for now.
-# Soil type will be added in the next step.
+# Now: rainfallScore (40%) + elevationScore (30%) + soilMoistureScore (30%)
+# Livestock and prevalence removed — replaced with dynamic API sources.
+# All three inputs now resolve live from coordinates.
 # ─────────────────────────────────────────────
 
 def calculate_base_risk(region, lat, lon):
     """
-    Rainfall still comes from your JSON (unchanged for now).
-    Elevation is new — fetched live from coordinates.
-    Combined 50/50 as an interim split until soil is added.
+    Base risk uses three independent dynamic inputs:
+      Rainfall (40%)       — regional long-term climate from JSON
+      Elevation (30%)      — live from Open-Meteo elevation API
+      Soil Moisture (30%)  — live from Open-Meteo forecast API
+    All three resolve from coordinates — no extra API keys needed.
     """
     if region not in REGION_DATA:
-        return None, None, None
+        return None, None, None, None
 
-    rainfall_score  = REGION_DATA[region]["rainfallScore"]
-    base_risk_score = REGION_DATA[region]["baseRiskScore"]
-    elevation_score = get_elevation_score(lat, lon)
+    rainfall_score      = REGION_DATA[region]["rainfallScore"]
+    elevation_score     = get_elevation_score(lat, lon)
+    soil_moisture_score = get_soil_moisture_score(lat, lon)
 
-    base_raw   = (rainfall_score * 0.5) + (elevation_score * 0.5)
-    base_score = round(base_raw * 0.6, 1)  # 60% of total
+    base_raw = (
+        (rainfall_score      * 0.40) +
+        (elevation_score     * 0.30) +
+        (soil_moisture_score * 0.30)
+    )
 
-    return base_score, rainfall_score, elevation_score
+    base_score = round(base_raw * 0.6, 1)  # Base risk is 60% of total score
+
+    return base_score, rainfall_score, elevation_score, soil_moisture_score
 
 
 # ─────────────────────────────────────────────
@@ -251,8 +302,9 @@ def parasite_risk():
     if lat is None or lon is None or region is None:
         return jsonify({"error": "Missing lat, lon, or region parameter"}), 400
 
-    # Base risk — now includes live elevation
-    base_score, rainfall_score, elevation_score = calculate_base_risk(region, lat, lon)
+    # Base risk — includes rainfall, elevation and soil moisture
+    # Unpacks all 4 values returned by calculate_base_risk
+    base_score, rainfall_score, elevation_score, soil_moisture_score = calculate_base_risk(region, lat, lon)
     if base_score is None:
         return jsonify({"error": f"Region '{region}' not found"}), 404
 
@@ -288,8 +340,9 @@ def parasite_risk():
         "riskLevel":   risk_level,
         # Breakdown so frontend can show what contributed to the score
         "breakdown": {
-            "rainfallScore":  rainfall_score,
-            "elevationScore": elevation_score,
+            "rainfallScore":     rainfall_score,
+            "elevationScore":    elevation_score,
+            "soilMoistureScore": soil_moisture_score,
         },
         "weather": {
             "temp":           current_weather["temp"],
@@ -301,7 +354,6 @@ def parasite_risk():
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
-
 
 
 
