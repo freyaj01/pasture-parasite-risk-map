@@ -1,74 +1,100 @@
 {
   "NorthWest": {
-    "rainfallMm": 1300,
-    "temperatureC": 10,
-    "humidityPercent": 85,
+    "rainfallMm": 1100,
     "rainfallScore": 75,
-    "prevalenceScore": 75,
-    "baseRiskScore": 45,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The North West gets a lot more rainfall than almost anywhere else in England, which results in a high fluke and nematode risk. Wet ground persists well into spring and autumn, extending the time for parasites to lay eggs."
   },
   "SouthWest": {
-    "rainfallMm": 1250,
-    "temperatureC": 11,
-    "humidityPercent": 83,
+    "rainfallMm": 1000,
     "rainfallScore": 75,
-    "prevalenceScore": 75,
-    "baseRiskScore": 45,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The South West is one of the highest risk regions in England for liver fluke, with mild winters and high rainfall keeping mud snail habitats wet for much of the year. Nematode presence is also evident through spring and autumn."
   },
   "WestMidlands": {
-    "rainfallMm": 800,
-    "temperatureC": 10,
-    "humidityPercent": 80,
+    "rainfallMm": 700,
     "rainfallScore": 50,
-    "prevalenceScore": 50,
-    "baseRiskScore": 30,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The West Midlands sits in a mid-range risk bracket. Rainfall is moderate and conditions are generally favourable for nematode development through warmer months. Fluke risk is lower than the western regions but worth monitoring in wet years."
   },
   "Yorkshire": {
-    "rainfallMm": 800,
-    "temperatureC": 9,
-    "humidityPercent": 80,
-    "rainfallScore": 25,
-    "prevalenceScore": 38,
-    "baseRiskScore": 21.9,
+    "rainfallMm": 650,
+    "rainfallScore": 50,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "Yorkshire sits in the middle, the upland western areas see higher rainfall and fluke prescence, while the drier eastern plains carry lower risk. Nematode risk peaks in spring and late summer across most of the region."
   },
   "EastMidlands": {
     "rainfallMm": 700,
-    "temperatureC": 10,
-    "humidityPercent": 78,
     "rainfallScore": 50,
-    "prevalenceScore": 40,
-    "baseRiskScore": 25,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The East Midlands is generally lower risk than western regions, though nematode and coccidia prescense remains in mixed farming areas. Liver fluke risk is low due to drier conditions."
   },
   "EastAnglia": {
     "rainfallMm": 600,
-    "temperatureC": 11,
-    "humidityPercent": 76,
     "rainfallScore": 25,
-    "prevalenceScore": 20,
-    "baseRiskScore": 12.6,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "East Anglia is the driest region in England, which keeps most pasture parasite risk relatively low. Liver fluke is uncommon here. Nematodes can still be an issue in wetter summers, but overall burden is lower than western regions."
   },
   "SouthEast": {
-    "rainfallMm": 780,
-    "temperatureC": 11,
-    "humidityPercent": 75,
-    "rainfallScore": 50,
-    "prevalenceScore": 40,
-    "baseRiskScore": 25,
+    "rainfallMm": 640,
+    "rainfallScore": 25,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The South East is generally low to moderate risk. Drier summers keep fluke pressure low, though nematodes can build up during wetter periods. Blowfly strike risk is worth watching through the warmer months."
   },
   "NorthEast": {
-    "rainfallMm": 800,
-    "temperatureC": 9,
-    "humidityPercent": 82,
+    "rainfallMm": 700,
     "rainfallScore": 50,
-    "prevalenceScore": 50,
-    "baseRiskScore": 30,
+    "source": "Met Office HadUK-Grid 1991-2020",
     "riskExplained": "The North East sees moderate rainfall and cooler temperatures, which slightly compresses the parasite development window compared to southern regions. Nematode and fluke risk are both present, particularly in wetter upland areas."
+  },
+  "ScotlandWest": {
+    "rainfallMm": 1299,
+    "rainfallScore": 100,
+    "source": "Met Office station: Glasgow/Bishopton 1991-2020 (1298.9mm)"
+  },
+  "ScotlandEast": {
+    "rainfallMm": 689,
+    "rainfallScore": 50,
+    "source": "Met Office station: Edinburgh/Gogarbank 1991-2020 (689.4mm)"
+  },
+  "ScotlandNorth": {
+    "rainfallMm": 642,
+    "rainfallScore": 50,
+    "source": "Met Office station: Inverness 1991-2020 (642.39mm)"
+  },
+  "ScotlandBorders": {
+    "rainfallMm": 660,
+    "rainfallScore": 50,
+    "source": "Met Office station: Charterhall 1991-2020 (659.7mm)"
+  },
+  "NorthWales": {
+    "rainfallMm": 2017,
+    "rainfallScore": 100,
+    "source": "Met Office station: Cwmystradllyn (Gwynedd) 1991-2020 (2016.79mm)"
+  },
+  "SouthWales": {
+    "rainfallMm": 1075,
+    "rainfallScore": 75,
+    "source": "Met Office station: Glamorgan CCC Cardiff 1991-2020 (1074.69mm)"
+  },
+  "MidWales": {
+    "rainfallMm": 1004,
+    "rainfallScore": 75,
+    "source": "Met Office station: Aberystwyth South 1991-2020 (1004.48mm)"
+  },
+  "EastWales": {
+    "rainfallMm": 831,
+    "rainfallScore": 50,
+    "source": "Met Office sourced data: Wrexham 1991-2020 (831mm)"
+  },
+  "NorthernIrelandEast": {
+    "rainfallMm": 941,
+    "rainfallScore": 75,
+    "source": "Met Office station: Belfast Newforge 1991-2020 (941.48mm)"
+  },
+  "NorthernIrelandWest": {
+    "rainfallMm": 1200,
+    "rainfallScore": 100,
+    "source": "Met Office Northern Ireland regional series 1991-2020 — west exceeds 1000mm"
   }
 }

@@ -48,16 +48,90 @@ const MapComponent = forwardRef<any, MapComponentProps>(
     const markerRef = useRef<any>(null);
     const leafletRef = useRef<any>(null);
 
-    // Function to determine which region based on coordinates
+    // ─────────────────────────────────────────────────────────────
+    // REGION DETECTION — Full UK coverage
+    // Maps lat/lon coordinates to a region key that matches
+    // the ukRegionData.json file.
+    // Regions checked in order from most specific to least,
+    // with a safe fallback at the bottom.
+    // Source for boundaries: standard UK administrative geography
+    // ─────────────────────────────────────────────────────────────
+
     const getRegionFromCoordinates = (lat: number, lng: number): string => {
-      if (lat > 53.5 && lng > -2) return "NorthEast";
-      if (lat > 53 && lng < -2) return "NorthWest";
-      if (lat >= 53 && lat <= 54.5 && lng >= -2 && lng <= 0) return "Yorkshire";
-      if (lat < 52 && lng < -2) return "SouthWest";
-      if (lat >= 52 && lat < 53.5 && lng > 0.5) return "EastAnglia";
-      if (lat < 52 && lng >= -1) return "SouthEast";
-      if (lat >= 52 && lat < 53 && lng >= -3 && lng < -1.3) return "WestMidlands";
-      if (lat >= 52 && lat < 53.5 && lng >= -1.3 && lng <= 0.5) return "EastMidlands";
+
+      // ── NORTHERN IRELAND ──────────────────────────────────────
+      // NI sits between lat 54.0–55.3, lng -8.2 to -5.4
+      if (lat >= 54.0 && lat <= 55.3 && lng >= -8.2 && lng <= -5.4) {
+        // West (Fermanagh, Tyrone, Derry) — more rainfall
+        if (lng < -6.5) return "NorthernIrelandWest";
+        // East (Belfast, Antrim, Armagh, Down)
+        return "NorthernIrelandEast";
+      }
+
+      // ── SCOTLAND ──────────────────────────────────────────────
+      if (lat >= 55.0) {
+        // Scotland West — west coast, Highlands west of Great Glen
+        // Glasgow, Argyll, Ayrshire, Dumfries & Galloway west
+        if (lng < -4.0 && lat < 57.5) return "ScotlandWest";
+
+        // Scotland North — Highlands, Caithness, Sutherland, Orkney, Shetland
+        if (lat >= 57.5) return "ScotlandNorth";
+
+        // Scotland Borders — south of Edinburgh, north of England
+        if (lat < 55.9 && lng >= -3.5) return "ScotlandBorders";
+
+        // Scotland East — Edinburgh, Dundee, Aberdeen, Fife, Angus
+        if (lng >= -4.0) return "ScotlandEast";
+
+        // Fallback for any remaining Scotland coords
+        return "ScotlandWest";
+      }
+
+      // ── WALES ─────────────────────────────────────────────────
+      // Wales sits roughly lat 51.3–53.5, lng -5.35 to -2.65
+      if (lng < -2.65 && lat >= 51.3 && lat <= 53.5) {
+
+        // North Wales — Gwynedd, Anglesey, Conwy, Denbighshire
+        if (lat >= 52.8) return "NorthWales";
+
+        // East Wales — Wrexham, Flintshire, Powys east, Monmouthshire
+        if (lng >= -3.5) return "EastWales";
+
+        // Mid Wales — Ceredigion, Powys, inland areas
+        if (lat >= 52.0) return "MidWales";
+
+        // South Wales — Cardiff, Swansea, Newport, Pembrokeshire
+        return "SouthWales";
+      }
+
+      // ── ENGLAND ───────────────────────────────────────────────
+
+      // North East — Newcastle, Durham, Sunderland, Middlesbrough, Tees Valley
+      if (lat > 54.5 && lng > -2.5) return "NorthEast";
+
+      // North West — Cumbria, Lancashire, Manchester, Liverpool, Cheshire
+      if (lat > 53.0 && lng < -2.0) return "NorthWest";
+
+      // Yorkshire — Leeds, Sheffield, York, Hull, East Riding
+      if (lat >= 53.0 && lat <= 54.5 && lng >= -2.5 && lng <= 0.0) return "Yorkshire";
+
+      // East Anglia — Norfolk, Suffolk, Cambridgeshire, Essex north
+      if (lat >= 51.5 && lat < 53.5 && lng > 0.5) return "EastAnglia";
+
+      // South West — Devon, Cornwall, Somerset, Dorset, Wiltshire, Gloucestershire
+      if (lat < 51.5 && lng < -2.0) return "SouthWest";
+
+      // South East — London, Kent, Sussex, Surrey, Hampshire, Berkshire, Essex south
+      if (lat < 51.8 && lng >= -1.8) return "SouthEast";
+
+      // West Midlands — Birmingham, Shropshire, Staffordshire, Worcestershire, Herefordshire
+      if (lat >= 51.8 && lat < 53.0 && lng >= -3.2 && lng < -1.3) return "WestMidlands";
+
+      // East Midlands — Nottingham, Leicester, Derby, Lincoln, Northampton, Rutland
+      if (lat >= 52.0 && lat < 53.5 && lng >= -1.3 && lng <= 0.5) return "EastMidlands";
+
+      // ── FALLBACK ──────────────────────────────────────────────
+      // Catches any gaps — defaults to East Midlands as central England
       return "EastMidlands";
     };
 
@@ -85,7 +159,7 @@ const MapComponent = forwardRef<any, MapComponentProps>(
       try {
         // Make a request to our Python Flask backend API with the clicked coordinates
         const weatherResponse = await fetch(
-          `http://127.0.0.1:8000/api/weather?lat=${lat}&lon=${lng}`,
+          `https://parasite-risk-api.onrender.com/api/weather?lat=${lat}&lon=${lng}`
         );
 
         // Check if the response was successful
@@ -104,7 +178,7 @@ const MapComponent = forwardRef<any, MapComponentProps>(
         const region = getRegionFromCoordinates(lat, lng);
 
         const riskResponse = await fetch(
-          `http://127.0.0.1:8000/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`,
+          `https://parasite-risk-api.onrender.com/api/parasite-risk?lat=${lat}&lon=${lng}&region=${region}`
         );
 
         if (riskResponse.ok) {
