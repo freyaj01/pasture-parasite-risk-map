@@ -338,6 +338,7 @@ def parasite_risk():
         "weatherRisk": round(weather_risk, 1),
         "totalRisk":   total,
         "riskLevel":   risk_level,
+        "regionData":  REGION_DATA[region],
         # Breakdown so frontend can show what contributed to the score
         "breakdown": {
             "rainfallScore":     rainfall_score,

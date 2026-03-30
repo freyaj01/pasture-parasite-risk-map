@@ -21,13 +21,13 @@
     "rainfallMm": 650,
     "rainfallScore": 50,
     "source": "Met Office HadUK-Grid 1991-2020",
-    "riskExplained": "Yorkshire sits in the middle, the upland western areas see higher rainfall and fluke prescence, while the drier eastern plains carry lower risk. Nematode risk peaks in spring and late summer across most of the region."
+    "riskExplained": "Yorkshire sits in the middle — the upland western areas see higher rainfall and fluke presence, while the drier eastern plains carry lower risk. Nematode risk peaks in spring and late summer across most of the region."
   },
   "EastMidlands": {
     "rainfallMm": 700,
     "rainfallScore": 50,
     "source": "Met Office HadUK-Grid 1991-2020",
-    "riskExplained": "The East Midlands is generally lower risk than western regions, though nematode and coccidia prescense remains in mixed farming areas. Liver fluke risk is low due to drier conditions."
+    "riskExplained": "The East Midlands is generally lower risk than western regions, though nematode and coccidia presence remains in mixed farming areas. Liver fluke risk is low due to drier conditions."
   },
   "EastAnglia": {
     "rainfallMm": 600,
@@ -50,51 +50,61 @@
   "ScotlandWest": {
     "rainfallMm": 1299,
     "rainfallScore": 100,
-    "source": "Met Office station: Glasgow/Bishopton 1991-2020 (1298.9mm)"
+    "source": "Met Office station: Glasgow/Bishopton 1991-2020 (1298.9mm)",
+    "riskExplained": "Scotland West is one of the highest rainfall regions in the UK, creating persistently wet pasture conditions year-round. This significantly extends larval survival on pasture and keeps fluke habitats active for much of the year. Nematode risk is high through spring and autumn."
   },
   "ScotlandEast": {
     "rainfallMm": 689,
     "rainfallScore": 50,
-    "source": "Met Office station: Edinburgh/Gogarbank 1991-2020 (689.4mm)"
+    "source": "Met Office station: Edinburgh/Gogarbank 1991-2020 (689.4mm)",
+    "riskExplained": "Scotland East is considerably drier than the west coast, with conditions more similar to northern England. Nematode risk is moderate and peaks in spring. Liver fluke risk is lower here but increases in wetter years or on poorly drained fields."
   },
   "ScotlandNorth": {
     "rainfallMm": 642,
     "rainfallScore": 50,
-    "source": "Met Office station: Inverness 1991-2020 (642.39mm)"
+    "source": "Met Office station: Inverness 1991-2020 (642.39mm)",
+    "riskExplained": "Northern Scotland has a shorter parasite development season due to cooler temperatures and higher altitude. While rainfall is moderate, the cold winters limit larval survival on pasture. Risk peaks in the brief warmer months of late spring and summer."
   },
   "ScotlandBorders": {
     "rainfallMm": 660,
     "rainfallScore": 50,
-    "source": "Met Office station: Charterhall 1991-2020 (659.7mm)"
+    "source": "Met Office station: Charterhall 1991-2020 (659.7mm)",
+    "riskExplained": "The Scottish Borders has moderate rainfall and mixed terrain. Upland areas carry higher fluke risk while lower ground sees more nematode pressure in spring and autumn. Risk levels are similar to northern England."
   },
   "NorthWales": {
     "rainfallMm": 2017,
     "rainfallScore": 100,
-    "source": "Met Office station: Cwmystradllyn (Gwynedd) 1991-2020 (2016.79mm)"
+    "source": "Met Office station: Cwmystradllyn (Gwynedd) 1991-2020 (2016.79mm)",
+    "riskExplained": "North Wales — particularly Gwynedd and Snowdonia — receives some of the highest rainfall in the UK. Persistently wet upland pastures create ideal conditions for liver fluke year-round. Nematode risk is also very high through spring and autumn."
   },
   "SouthWales": {
     "rainfallMm": 1075,
     "rainfallScore": 75,
-    "source": "Met Office station: Glamorgan CCC Cardiff 1991-2020 (1074.69mm)"
+    "source": "Met Office station: Glamorgan CCC Cardiff 1991-2020 (1074.69mm)",
+    "riskExplained": "South Wales has high rainfall and mild winters, keeping pasture conditions wet for much of the year. Liver fluke risk is significant, particularly on low-lying and poorly drained land. Nematode pressure is high through spring and autumn."
   },
   "MidWales": {
     "rainfallMm": 1004,
     "rainfallScore": 75,
-    "source": "Met Office station: Aberystwyth South 1991-2020 (1004.48mm)"
+    "source": "Met Office station: Aberystwyth South 1991-2020 (1004.48mm)",
+    "riskExplained": "Mid Wales receives high annual rainfall and has extensive upland grazing. Liver fluke is a major concern due to persistently wet conditions. Nematode risk is elevated through the main grazing season, particularly in spring."
   },
   "EastWales": {
     "rainfallMm": 831,
     "rainfallScore": 50,
-    "source": "Met Office sourced data: Wrexham 1991-2020 (831mm)"
+    "source": "Met Office sourced data: Wrexham 1991-2020 (831mm)",
+    "riskExplained": "East Wales is drier than the rest of Wales but still carries moderate parasite risk. Nematode pressure is present through the grazing season and liver fluke risk increases in wetter years, particularly on heavier soils."
   },
   "NorthernIrelandEast": {
     "rainfallMm": 941,
     "rainfallScore": 75,
-    "source": "Met Office station: Belfast Newforge 1991-2020 (941.48mm)"
+    "source": "Met Office station: Belfast Newforge 1991-2020 (941.48mm)",
+    "riskExplained": "Northern Ireland East has high rainfall and a mild Atlantic climate that keeps pastures wet for much of the year. Liver fluke risk is significant and nematode pressure is high through spring and autumn. The mild winters allow some larval survival year-round."
   },
   "NorthernIrelandWest": {
     "rainfallMm": 1200,
     "rainfallScore": 100,
-    "source": "Met Office Northern Ireland regional series 1991-2020 — west exceeds 1000mm"
+    "source": "Met Office Northern Ireland regional series 1991-2020 — west exceeds 1000mm",
+    "riskExplained": "Northern Ireland West is one of the highest risk areas in the UK for liver fluke, with very high rainfall, mild temperatures and low-lying wet ground providing ideal conditions for mud snails year-round. Nematode risk is also very high throughout the grazing season."
   }
 }
