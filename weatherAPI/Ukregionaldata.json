@@ -1,0 +1,92 @@
+{
+  "NorthWest": {
+    "rainfallMm": 1100,
+    "rainfallScore": 75,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "SouthWest": {
+    "rainfallMm": 1000,
+    "rainfallScore": 75,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "WestMidlands": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "Yorkshire": {
+    "rainfallMm": 650,
+    "rainfallScore": 50,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "EastMidlands": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "EastAnglia": {
+    "rainfallMm": 600,
+    "rainfallScore": 25,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "SouthEast": {
+    "rainfallMm": 640,
+    "rainfallScore": 25,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "NorthEast": {
+    "rainfallMm": 700,
+    "rainfallScore": 50,
+    "source": "Met Office HadUK-Grid 1991-2020"
+  },
+  "ScotlandWest": {
+    "rainfallMm": 1299,
+    "rainfallScore": 100,
+    "source": "Met Office station: Glasgow/Bishopton 1991-2020 (1298.9mm)"
+  },
+  "ScotlandEast": {
+    "rainfallMm": 689,
+    "rainfallScore": 50,
+    "source": "Met Office station: Edinburgh/Gogarbank 1991-2020 (689.4mm)"
+  },
+  "ScotlandNorth": {
+    "rainfallMm": 642,
+    "rainfallScore": 50,
+    "source": "Met Office station: Inverness 1991-2020 (642.39mm)"
+  },
+  "ScotlandBorders": {
+    "rainfallMm": 660,
+    "rainfallScore": 50,
+    "source": "Met Office station: Charterhall 1991-2020 (659.7mm)"
+  },
+  "NorthWales": {
+    "rainfallMm": 2017,
+    "rainfallScore": 100,
+    "source": "Met Office station: Cwmystradllyn (Gwynedd) 1991-2020 (2016.79mm)"
+  },
+  "SouthWales": {
+    "rainfallMm": 1075,
+    "rainfallScore": 75,
+    "source": "Met Office station: Glamorgan CCC Cardiff 1991-2020 (1074.69mm)"
+  },
+  "MidWales": {
+    "rainfallMm": 1004,
+    "rainfallScore": 75,
+    "source": "Met Office station: Aberystwyth South 1991-2020 (1004.48mm)"
+  },
+  "EastWales": {
+    "rainfallMm": 831,
+    "rainfallScore": 50,
+    "source": "Met Office sourced data: Wrexham 1991-2020 (831mm)"
+  },
+  "NorthernIrelandEast": {
+    "rainfallMm": 941,
+    "rainfallScore": 75,
+    "source": "Met Office station: Belfast Newforge 1991-2020 (941.48mm)"
+  },
+  "NorthernIrelandWest": {
+    "rainfallMm": 1200,
+    "rainfallScore": 100,
+    "source": "Met Office Northern Ireland regional series 1991-2020 — west exceeds 1000mm"
+  }
+}

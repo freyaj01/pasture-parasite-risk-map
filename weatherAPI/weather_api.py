@@ -6,7 +6,7 @@ import datetime
 import os
 
 # Get the path to the JSON file
-json_path = os.path.join(os.path.dirname(__file__), 'englandRegionData.json')
+json_path = os.path.join(os.path.dirname(__file__), 'ukRegionalData.json')
 # Load the data
 with open(json_path, 'r') as f:
     REGION_DATA = json.load(f)
