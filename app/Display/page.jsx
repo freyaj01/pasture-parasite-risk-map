@@ -269,7 +269,7 @@ export default function Display() {
               </h3>
 
               <div className="text-sm text-gray-700 space-y-1 mb-6 border-t pt-4">
-                 <p>{weatherData.parasiteRisk.regionData?.riskExplained ?? "Risk information is loading for this region."}</p>
+                <p>{weatherData.parasiteRisk.regionData.riskExplained}</p>
               </div>
 
               {/* Recommended Actions */}
@@ -278,7 +278,7 @@ export default function Display() {
                   Recommended Actions
                 </h4>
 
-                {weatherData.parasiteRisk.totalRisk >= 7 && (
+                {weatherData.parasiteRisk.totalRisk >= 75 && (
                   <ul className="text-sm text-gray-700 list-disc ml-5 space-y-1">
                     <li>Consider fecal egg count testing</li>
                     <li>Monitor animals for weight loss</li>
@@ -287,8 +287,8 @@ export default function Display() {
                   </ul>
                 )}
 
-                {weatherData.parasiteRisk.totalRisk >= 4 &&
-                  weatherData.parasiteRisk.totalRisk < 7 && (
+                {weatherData.parasiteRisk.totalRisk >= 50 &&
+                  weatherData.parasiteRisk.totalRisk < 75 && (
                     <ul className="text-sm text-gray-700 list-disc ml-5 space-y-1">
                       <li>Monitor animals closely</li>
                       <li>Plan testing if wet weather continues</li>
@@ -296,12 +296,20 @@ export default function Display() {
                     </ul>
                   )}
 
-                {weatherData.parasiteRisk.totalRisk < 4 && (
+                {weatherData.parasiteRisk.totalRisk < 25 && 
+                 weatherData.parasiteRisk.totalRisk < 50 && (
                   <ul className="text-sm text-gray-700 list-disc ml-5 space-y-1">
                     <li>Continue normal monitoring</li>
                     <li>No immediate action needed</li>
                   </ul>
                 )}
+                {/* Low */}
+                {weatherData.parasiteRisk.totalRisk < 25 && (
+                 <ul className="text-sm text-gray-700 list-disc ml-5 space-y-1">
+                 <li>No immediate action needed</li>
+                <li>Continue routine farm management</li>
+              </ul>
+              )}  
               </div>
 
               {/* Why risk is at this level */}
@@ -340,11 +348,9 @@ export default function Display() {
                   </h4>
 
                   {(() => {
-                    const region = weatherData.parasiteRisk.regionData;
-                    const temp = region.temperatureC;
-                    const recentRain = region.rainfallMm;
-                    const humidity = region.humidityPercent;
-                    const density = region.livestockDensity;
+                   const temp = weatherData.parasiteRisk.weather.temp;
+                   const humidity   = weatherData.parasiteRisk.weather.humidity;
+                   const recentRain = weatherData.parasiteRisk.weather.recentRainfall;
                     const parasites = getParasiteCals(
                       temp,
                       recentRain,
