@@ -269,7 +269,7 @@ export default function Display() {
               </h3>
 
               <div className="text-sm text-gray-700 space-y-1 mb-6 border-t pt-4">
-                <p>{weatherData.parasiteRisk.regionData.riskExplained}</p>
+                 <p>{weatherData.parasiteRisk.regionData?.riskExplained ?? "Risk information is loading for this region."}</p>
               </div>
 
               {/* Recommended Actions */}
