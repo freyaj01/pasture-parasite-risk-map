@@ -73,7 +73,7 @@ export function Ectoparasites() {
   return (
     <main>
       <Header />
-      <section className="bg-[#0072ce] text-white py-10 px-6">
+      <section className="bg-[#0079be] text-white py-10 px-6">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 leading-tight">
             Ectoparasites
